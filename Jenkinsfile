@@ -38,16 +38,12 @@ pipeline {
       		}
 		 stage('Create mvn clean install') {
 			steps {
-				dir('ticket') {
 					sh 'mvn clean install -DskipTests=true'
-        			}
         		}
       		}
 		stage('Build Images') {
 			steps {
-				dir('ticket') {
 					sh 'docker-compose up --build -d'
-        			}
         		}
       		}
       	stage('Docker Push') {
