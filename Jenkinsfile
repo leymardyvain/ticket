@@ -31,21 +31,21 @@ pipeline {
       	stage('Stop haproxy loadbalancer') {
 			steps {
 				echo 'starting stop container ...'
-				sh 'docker ps -f name=access_hapee -q | xargs --no-run-if-empty docker container stop'
-				sh 'docker container ls -a -f name=access_hapee -q | xargs -r docker container rm'
+				sh 'docker ps -f name=ticket_hapee -q | xargs --no-run-if-empty docker container stop'
+				sh 'docker container ls -a -f name=ticket_hapee -q | xargs -r docker container rm'
 				sh 'docker system prune -a -f'	
         		}
       		}
 		 stage('Create mvn clean install') {
 			steps {
-				dir('access') {
+				dir('ticket') {
 					sh 'mvn clean install -DskipTests=true'
         			}
         		}
       		}
 		stage('Build Images') {
 			steps {
-				dir('access') {
+				dir('ticket') {
 					sh 'docker-compose up --build -d'
         			}
         		}
