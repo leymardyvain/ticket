@@ -8,14 +8,14 @@ pipeline {
 		nodejs 'NodeJs'
 	}
 	environment {
-		DOCKER_HUB_REPO = 'yleymard/spring_mantis'
+		DOCKER_HUB_REPO = 'yleymard/spring_ticket'
 		DOCKER_HUB_CREDENTIALS_ID = 'jenkins-dockerhub'
 	}
 	stages {
 		stage('Checkout Access GitHub'){
 			steps{
 					echo "Checkout Access GitHub"
-					git credentialsId: 'Jenkins-ArgoCD', url: 'https://github.com/leymardyvain/rapport01.git'
+					git credentialsId: 'Jenkins-ArgoCD', url: 'https://github.com/leymardyvain/ticket.git'
         		}
     		}
 		 stage('Create mvn clean install') {
@@ -52,7 +52,7 @@ pipeline {
 				kubeconfig (credentialsId: 'argocdconfig', serverUrl: 'https://192.168.47.137:6443') {
 					sh '''
 					argocd login 192.168.47.137:31722 --username admin --password $(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d) --insecure
-					argocd app sync spring-mantis-private
+					argocd app sync spring-ticket-private
      					'''
 				}
 
