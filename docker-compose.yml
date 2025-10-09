@@ -15,7 +15,7 @@ services:
     environment:
       
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: rapportDB
+      MYSQL_DATABASE: infoDB
       MYSQL_ROOT_HOST: "%"
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
 
