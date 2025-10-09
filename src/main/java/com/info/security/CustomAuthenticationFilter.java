@@ -41,11 +41,9 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		
 		log.info("username is : {} " + username);
 		log.info("password is : {} " + password);
-		
-		System.out.println("username "+username);
-		System.out.println("password "+password);
 		
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
 				password);
@@ -55,8 +53,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
-		
-		System.out.println("dans successfulAuthentication");
 		
 		User user = (User) authResult.getPrincipal();
 		Algorithm algorithm = Algorithm.HMAC256(secretKey.getBytes());

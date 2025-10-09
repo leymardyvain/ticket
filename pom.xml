@@ -147,7 +147,7 @@
                 </executions>
                 <configuration>
                     <nodeVersion>v19.6.1</nodeVersion>
-                    <workingDirectory>src/main/mantis</workingDirectory>
+                    <workingDirectory>src/main/frontend</workingDirectory>
                     <installDirectory>${project.build.directory}</installDirectory>
                 </configuration>
             </plugin>
@@ -167,7 +167,7 @@
                             <outputDirectory>target/classes/static</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>src/main/mantis/dist</directory>
+                                    <directory>src/main/frontend/dist</directory>
                                     <filtering>false</filtering>
                                 </resource>
                             </resources>

@@ -1,0 +1,71 @@
+#!groovy
+
+pipeline {
+	agent any
+	tools{
+        	maven 'maven 3.8.7' // This is the tool that we need to run mvn project
+		jdk 'OpenJDK17'
+		nodejs 'NodeJs'
+	}
+	environment {
+		DOCKER_HUB_REPO = 'yleymard/spring_mantis'
+		DOCKER_HUB_CREDENTIALS_ID = 'jenkins-dockerhub'
+	}
+	stages {
+		stage('Checkout Access GitHub'){
+			steps{
+					echo "Checkout Access GitHub"
+					git credentialsId: 'Jenkins-ArgoCD', url: 'https://github.com/leymardyvain/rapport01.git'
+        		}
+    		}
+		 stage('Create mvn clean install') {
+			steps {
+				dir('access') {
+					sh 'mvn clean install -DskipTests=true'
+        			}
+        		}
+      		}
+		stage('Build Docker images') {
+			steps {
+				dir('access') {
+					script{
+						echo "Docker Build"
+						dockerImage = docker.build("${DOCKER_HUB_REPO}:latest")
+					}
+        			}
+        		}
+      		}
+      	stage('Docker Push') {
+      		steps {
+			script {
+          		echo "Docker Push"
+			docker.withRegistry('https://registry.hub.docker.com', "${DOCKER_HUB_CREDENTIALS_ID}"){
+				dockerImage.push('latest')
+				}
+			}
+        	}
+          }
+	stage('Connect to Kubernetes') {
+      		steps {
+			script {
+				echo "connect to kubernetes"
+				kubeconfig (credentialsId: 'argocdconfig', serverUrl: 'https://192.168.47.137:6443') {
+					sh '''
+					argocd login 192.168.47.137:31722 --username admin --password $(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d) --insecure
+					argocd app sync spring-mantis-private
+     					'''
+				}
+
+			}
+          	
+        	}
+          }
+      }
+
+	post {
+        	success {
+		  		echo "Good state !!!"
+        	}
+	}
+	
+}
