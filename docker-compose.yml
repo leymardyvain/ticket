@@ -9,9 +9,7 @@ services:
     container_name: db_spring_ticket
     
     restart: unless-stopped
-    
-    env_file: ./.env
-    
+  
     environment:
       
       MYSQL_ROOT_PASSWORD: root
@@ -39,9 +37,7 @@ services:
     image: yleymard/spring_ticket:latest
         
     restart: on-failure
-    
-    env_file: ./.env
-    
+      
     ports:
       - "8888"
       
@@ -66,8 +62,6 @@ services:
          
     restart: on-failure
     
-    env_file: ./.env
-    
     ports:
       - "8888"
       
@@ -91,9 +85,7 @@ services:
     image: yleymard/spring_ticket:latest
          
     restart: on-failure
-    
-    env_file: ./.env
-    
+        
     ports:
       - "8888"
       
@@ -118,8 +110,6 @@ services:
          
     restart: on-failure
     
-    env_file: ./.env
-    
     ports:
       - "8888"
       
@@ -143,8 +133,6 @@ services:
     image: yleymard/spring_ticket:latest
          
     restart: on-failure
-    
-    env_file: ./.env
     
     ports:
       - "8888"
