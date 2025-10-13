@@ -17,6 +17,7 @@ import { useGetMenuMaster } from 'api/menu';
 import ProtectedAccessSuperviseur from '../../../../views/pages/protect/ProtectedAccessSuperviseur';
 import ProtectedAccessAdmin from '../../../../views/pages/protect/ProtectedAccessAdmin';
 import ProtectedAccessUser from '../../../../views/pages/protect/ProtectedAccessUser';
+import ProtectedView from '../../../../views/pages/protect/ProtectedView';
 
 // ==============================|| SIDEBAR MENU LIST GROUP ||============================== //
 
@@ -86,6 +87,8 @@ export default function NavGroup({ item, lastItem, remItems, lastItemId, setSele
     const admin = ProtectedAccessAdmin();
     const user = ProtectedAccessUser();
 
+    const usernameAdmin = ProtectedView();
+
     switch (menu?.type) {
       case 'collapse':
         return <NavCollapse key={menu.id} menu={menu} level={1} parentId={currentItem.id} />;
@@ -111,22 +114,22 @@ export default function NavGroup({ item, lastItem, remItems, lastItemId, setSele
           return <NavItem key={menu.id} item={menu} level={1} />;
         }
         if (menu.url === "/personnel") {
-          if (superviseur) {
+          if (superviseur || usernameAdmin === "admin") {
             return <NavItem key={menu.id} item={menu} level={1} />;
           }
         }
         if (menu.url === "/departement") {
-          if (superviseur) {
+          if (superviseur || usernameAdmin === "admin") {
             return <NavItem key={menu.id} item={menu} level={1} />;
           }
         }
         if (menu.url === "/societe") {
-          if (superviseur) {
+          if (superviseur || usernameAdmin === "admin") {
             return <NavItem key={menu.id} item={menu} level={1} />;
           }
         }
         if (menu.url === "/ville") {
-          if (superviseur) {
+          if (superviseur || usernameAdmin === "admin") {
             return <NavItem key={menu.id} item={menu} level={1} />;
           }
         }
