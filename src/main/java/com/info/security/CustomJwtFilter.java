@@ -42,7 +42,7 @@ public class CustomJwtFilter extends OncePerRequestFilter {
 		if (request.getServletPath().contains("/api/login") ||
 				request.getServletPath().contains("/api/token/refreshtoken") 
 				|| request.getServletPath().contains("/assets") 
-				|| request.getServletPath().contains("/login")
+				|| request.getServletPath().contains("/pages/login")
 				|| request.getServletPath().contains("/")
 				|| request.getServletPath().contains("/index.html")) {
 
