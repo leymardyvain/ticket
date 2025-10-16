@@ -79,6 +79,10 @@ export const getHistorique = (username) => {
   return apihistorique.get(`/byusername/${username}`, (username));
 };
 
+export const getHistoriqueByPersonnel = (username) => {
+  return apihistorique.get(`/historiquebypersonnel/${username}`, (username));
+};
+
 export const getHistorique_Superviseur = (nom_societe) => {
   return apihistorique.get(`/bynom_societe/${nom_societe}`, (nom_societe));
 };

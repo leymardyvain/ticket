@@ -38,6 +38,12 @@ public class HistoriqueService {
 					.findHistoriqueByID_suivi_Ticket(id);
 			return Historique;
 		}
+		
+		public List<Historique> getHistoriqueById_personnel(String  username) {
+			List<Historique> Historique = HistoriqueRepo
+					.findHistoriqueByID_Personnel(username);
+			return Historique;
+		}
 
 	 /*   public Historique updateHistorique(Long id, Historique Historique) {
 	        Historique existingHistorique = HistoriqueRepo.findById(id).orElseThrow(() -> new RuntimeException("Historique not found"));

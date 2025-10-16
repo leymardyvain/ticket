@@ -84,4 +84,12 @@ public interface Suivi_TicketRepo extends JpaRepository<Suivi_Ticket, Long>, Jpa
 	
 	@Query("select u from Suivi_Ticket u where u.etat_Ticket.nom_etat_Ticket= 'Fermé' ORDER BY Id_suivi_Ticket DESC")
 	List<Suivi_Ticket> findSuiviTicketByFerme_dashboardAdmin();
+	
+	/************************ Dashboard Activities Admin Superviseur ***************************************/
+	
+	@Query("select u from Suivi_Ticket u where u.personnel_en_charge.user.username= :username ORDER BY Id_suivi_Ticket DESC")
+	List<Suivi_Ticket> findSuiviTicketByPersonnelEnCharge(String username);
+	
+	@Query("select u from Suivi_Ticket u where u.personnel_assignateur.user.username= :username ORDER BY Id_suivi_Ticket DESC")
+	List<Suivi_Ticket> findSuiviTicketByPersonnelAssignateur(String username);
 }

@@ -148,6 +148,16 @@ public class Suivi_TicketService {
 		List<Suivi_Ticket> Suivi_Ticket = Suivi_TicketRepo.findSuiviTicketByNumeroTicket(num);
 		return Suivi_Ticket;
 	}
+	
+	public List<Suivi_Ticket> getActivitesAdmin(String username) {
+		List<Suivi_Ticket> Suivi_TicketAdmin = Suivi_TicketRepo.findSuiviTicketByPersonnelEnCharge(username);
+		return Suivi_TicketAdmin;
+	}
+	
+	public List<Suivi_Ticket> getActivitesSuperviseur(String username) {
+		List<Suivi_Ticket> Suivi_TicketSup = Suivi_TicketRepo.findSuiviTicketByPersonnelAssignateur(username);
+		return Suivi_TicketSup;
+	}
 
 	public Suivi_Ticket createSuivi_Ticket(Suivi_Ticket Suivi_Ticket) {
 		return Suivi_TicketRepo.save(Suivi_Ticket);

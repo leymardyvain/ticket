@@ -94,6 +94,10 @@ export const getSuivi_Ticket_Superviseur = (nom_societe) => {
   return apisuivi_Ticket.get(`/bynom_societe_en_attente_assignation`);
 };
 
+export const getNombreActivities = (username) => {
+  return apisuivi_Ticket.get(`/nombre_activities/${username}`, (username));
+};
+
 export const getSuivi_Ticket_Superviseur_en_cours_assignation = (username) => {
   return apisuivi_Ticket.get(`/bynom_societe_en_cours_assignation/${username}`, (username));
 };

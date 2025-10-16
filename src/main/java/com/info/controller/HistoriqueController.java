@@ -61,6 +61,15 @@ public class HistoriqueController {
 		List<Historique> historique = historiqueService.getHistoriqueById_suivi_Ticket(id);
 		return ResponseEntity.ok(historique);
 	}
+	
+	// Get a historique by ID Personnel
+
+	@GetMapping("/historiquebypersonnel/{username}")
+	public ResponseEntity<?> getHistoriqueByIDPersonnel(@PathVariable String username) {
+		List<Historique> historique = historiqueService.getHistoriqueById_personnel(username);
+		System.out.println("nombre "+historique.size());
+		return ResponseEntity.ok(historique);
+	}
 
 	// Create a new historique
 	@PostMapping

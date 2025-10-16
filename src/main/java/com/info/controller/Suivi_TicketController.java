@@ -430,6 +430,16 @@ public class Suivi_TicketController {
 		return ResponseEntity.ok(suivi_Tickets);
 	}
 
+	@GetMapping("/nombre_activities/{username}")
+	public ResponseEntity<Integer> getAllActivities(@PathVariable String username) {
+		List<Suivi_Ticket> suivi_TicketsAdmin = suivi_TicketService
+				.getActivitesAdmin(username);
+		List<Suivi_Ticket> suivi_TicketsSup = suivi_TicketService
+				.getActivitesSuperviseur(username);
+		Integer NbreActivities= suivi_TicketsAdmin.size()+suivi_TicketsSup.size();
+		return ResponseEntity.ok(NbreActivities);
+	}
+	
 	@GetMapping("/bynom_societe_en_cours_assignation/{username}")
 	public ResponseEntity<List<Suivi_Ticket>> getAllSuivi_TicketsByNom_societe(@PathVariable String username) {
 		List<Suivi_Ticket> suivi_Tickets = suivi_TicketService
