@@ -77,8 +77,10 @@ export default function NotificationSection() {
       const response = await getHistorique(username);
       setListNotification(response.data);
       if (response.data.length > 0) {
-        if (nbrefois === 1)
+        if (nbrefois === 1) {
           audioRef.current.play();
+        }
+
       } else {
         // Optionally, pause or reset the audio when the dialog closes
         audioRef.current.pause();

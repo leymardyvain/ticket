@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import { addPersonnel } from '../../api/APIpersonnel';
-import { getVille } from '../../api/APIville';
 import ListPersonnel from './ListPersonnel';
 import MyStepperForm from './MyStepperForm';
 
@@ -20,8 +19,6 @@ function Personnel() {
 
   const [isAddedPersonnel, setIsAddedPersonnel] = useState(false);
   const [isPersonnelAdded, setIsPersonnelAdded] = useState(false);
-
-  const [ville, setVille] = useState([]);
 
   const [formData, setFormData] = React.useState({
     Id_personnel: '',
@@ -68,23 +65,6 @@ function Personnel() {
       });
     }
   };
-
-  
-  /*const fetchDataVille = async () => {
-    try {
-      const response = await getVille();
-      setVille(response.data);
-    } catch (error) {
-      console.error('Error fetching ville:', error);
-    }
-  };
-
-  React.useEffect(() => {
-    fetchDataVille();
-  }, []);
-const PersonnelAdded = () => {
-    setIsAddedPersonnel(true);
-  };*/
 
   return (
     <>

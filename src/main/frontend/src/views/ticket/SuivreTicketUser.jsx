@@ -1,18 +1,16 @@
-import { Button, Chip, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, TextField, Tooltip } from '@mui/material'
-import { IconAccessible, IconArrowAutofitContent, IconBan, IconChecklist, IconCircleCheck, IconCirclePlus, IconClock, IconDirections, IconDoor, IconEye, IconPlaystationX, IconSettingsAutomation } from '@tabler/icons-react';
+import { Chip, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, TextField, Tooltip } from '@mui/material'
+import { IconAccessible, IconBan, IconCircleCheck, IconClock, IconDoor, IconEye, IconPlaystationX, IconSettingsAutomation } from '@tabler/icons-react';
 import React, { useState } from 'react'
 import MainCard from 'ui-component/cards/MainCard';
 import { getSuivi_Ticket } from '../../api/APIsuiviTicket';
 import { getCountFichier } from '../../api/APIfichier';
 import ProtectedView from '../pages/protect/ProtectedView';
 import { format } from "date-fns";
-import DisplayDialog from './DisplayDialog';
 import DisplayUserDialog from './DisplayUserDialog';
-import ConfirmationDialog from './ConfirmationDialog';
 import ConfirmationUserDialog from './ConfirmationUserDialog';
 import AnnulationUserDialog from './AnnulationUserDialog';
 
-function ListTicket({ handlePage }) {
+function SuivreTicketUser() {
 
     const [page, setPage] = React.useState(0);
 
@@ -196,15 +194,6 @@ function ListTicket({ handlePage }) {
 
     return (
         <Grid container spacing={2}>
-            <Grid container direction="row" size={12}>
-                <Button
-                    variant="contained"
-                    onClick={handlePage}
-                    style={{ backgroundColor: "#793198", color: "#fafafaff" }}
-                    startIcon={<IconCirclePlus />}>
-                    Ajouter un ticket
-                </Button>
-            </Grid>
             <Grid size={12}>
                 <MainCard title="Liste tickets">
                     <TextField
@@ -312,4 +301,4 @@ function ListTicket({ handlePage }) {
     )
 }
 
-export default ListTicket
+export default SuivreTicketUser

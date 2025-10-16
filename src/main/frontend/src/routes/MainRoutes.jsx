@@ -25,6 +25,7 @@ const UnauthorizedPage = Loadable(lazy(() => import('views/ticket/SuivreTicket.j
 const SuivreMesAssignations = Loadable(lazy(() => import('views/ticket/SuivreTicket.jsx')));
 const Assignation = Loadable(lazy(() => import('views/ticket/SuivreTicketSuperviseur.jsx')));
 const Ticket = Loadable(lazy(() => import('views/ticket')));
+const ListTicket = Loadable(lazy(() => import('views/ticket/SuivreTicketUser.jsx')));
 const Rapport = Loadable(lazy(() => import('views/rapport')));
 const Personnel = Loadable(lazy(() => import('views/personnel')));
 const Departement = Loadable(lazy(() => import('views/departement')));
@@ -87,6 +88,10 @@ const MainRoutes = {
     {
       path: 'ticket',
       element: <ProtectedRoutes><Ticket /></ProtectedRoutes>
+    },
+    {
+      path: 'list_ticket',
+      element: <ProtectedRoutes><ListTicket /></ProtectedRoutes>
     },
     {
       path: 'rapport',

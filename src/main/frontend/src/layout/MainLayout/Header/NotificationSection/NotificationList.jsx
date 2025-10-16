@@ -19,26 +19,9 @@ import { format } from "date-fns";
 import { IconBrandTelegram, IconBuildingStore, IconMailbox, IconPhoto, IconUserCircle } from '@tabler/icons-react';
 import User1 from 'assets/images/users/user-round.svg';
 import { ListItemButton } from '@mui/material';
-import { Link } from 'react-router';
 
 function ListItemWrapper({ children }) {
   const theme = useTheme();
-
-  const getRedirect = (statut) => {
-
-    switch (statut) {
-      case 'En attente assignation':
-        return "/assigner_ticket";
-      case 'Assigné':
-        return "/assigner_ticket";
-      case 'En cours résolution':
-        return "/assigner_ticket";
-      case 'Fermé':
-        return "/assigner_ticket";
-      default:
-        return {}; // Default style or no style
-    }
-  };
 
   return (
     <Box

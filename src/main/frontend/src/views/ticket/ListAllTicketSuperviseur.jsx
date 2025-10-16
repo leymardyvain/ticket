@@ -45,7 +45,6 @@ function ListSuiviSuperviseur() {
         try {
             const response = await getSuivi_Ticket_Superviseur_All_Etat(value);
             setSuivi(response.data);
-            console.log('suivi ', response.data);
         } catch (error) {
             console.error('Error fetching suivi ticket all:', error);
         }
@@ -186,17 +185,6 @@ function ListSuiviSuperviseur() {
                 return '#5591ebff';
             default:
                 return {}; // Default style or no style
-        }
-    };
-
-    async function getNumberFile(num) {
-        console.log("check ", num);
-        try {
-            const response = await getCountFichier(num);
-            console.log("count ", response.data);
-        }
-        catch (er) {
-            console.log("une erreur est arrivée lors de quantage du nombre de fichier", er);
         }
     };
 

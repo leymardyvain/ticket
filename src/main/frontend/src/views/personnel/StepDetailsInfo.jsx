@@ -22,6 +22,22 @@ function StepDetailsInfo({ formData, setFormData, selectedroles, setOpen, open, 
         setOpen(false);
     };
 
+    const getDynamiNameRole = (role) => {
+
+        switch (role) {
+            case 'ROLE_USER':
+                return "Utilisateur";
+            case 'ROLE_ADMIN':
+                return "Administrateur";
+            case 'ROLE_SUPERVISEUR':
+                return "Superviseur";
+            default:
+                return {}; // Default style or no style
+        }
+
+    };
+
+
     function getStyles(name, selectedroles, theme) {
         return {
             fontWeight: selectedroles.includes(name)
@@ -60,7 +76,7 @@ function StepDetailsInfo({ formData, setFormData, selectedroles, setOpen, open, 
                             renderValue={(selected) => (
                                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                                     {selected.map((value) => (
-                                        <Chip key={value} label={value} />
+                                        <Chip key={value} label={getDynamiNameRole(value)} />
                                     ))}
                                 </Box>
                             )}
@@ -71,7 +87,7 @@ function StepDetailsInfo({ formData, setFormData, selectedroles, setOpen, open, 
                                     value={role.role_name}
                                     style={getStyles(role.role_name, selectedroles, theme)}
                                 >
-                                    {role.role_name}
+                                    {getDynamiNameRole(role.role_name)}
                                 </MenuItem>
                             ))}
                         </Select>

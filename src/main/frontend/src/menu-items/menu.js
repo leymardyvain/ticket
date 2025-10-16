@@ -35,6 +35,14 @@ const My_Menu = {
       breadcrumbs: false
     },
     {
+      id: 'Listicket',
+      title: 'Mes Tickets',
+      type: 'item',
+      url: '/list_ticket',
+      icon: icons.IconTicket,
+      breadcrumbs: false
+    },
+    {
       id: 'Rapport',
       title: 'Rapport',
       type: 'item',

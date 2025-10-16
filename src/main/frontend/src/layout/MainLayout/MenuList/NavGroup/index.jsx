@@ -110,6 +110,9 @@ export default function NavGroup({ item, lastItem, remItems, lastItemId, setSele
         if (menu.url === '/ticket') {
           return <NavItem key={menu.id} item={menu} level={1} />;
         }
+        if (menu.url === '/list_ticket') {
+          return <NavItem key={menu.id} item={menu} level={1} />;
+        }
         if (menu.url === '/rapport') {
           return <NavItem key={menu.id} item={menu} level={1} />;
         }
