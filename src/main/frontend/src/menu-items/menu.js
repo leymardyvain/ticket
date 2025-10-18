@@ -1,8 +1,8 @@
 // assets
-import { IconApps, IconArrowAutofitContent, IconBrandOffice, IconBuildingSkyscraper, IconEye, IconEyeCheck, IconLocation, IconReportAnalytics, IconTicket, IconUserPlus } from '@tabler/icons-react';
+import { IconApps, IconArrowAutofitContent, IconBooks, IconBrandOffice, IconBuildingSkyscraper, IconEye, IconEyeCheck, IconLocation, IconReportAnalytics, IconTicket, IconUserPlus } from '@tabler/icons-react';
 
 // constant
-const icons = { IconUserPlus, IconLocation, IconBuildingSkyscraper, IconBrandOffice, IconTicket, IconReportAnalytics, IconEyeCheck, IconArrowAutofitContent };
+const icons = { IconBooks, IconUserPlus, IconLocation, IconBuildingSkyscraper, IconBrandOffice, IconTicket, IconReportAnalytics, IconEyeCheck, IconArrowAutofitContent };
 
 // ==============================|| SAMPLE PAGE & DOCUMENTATION MENU ITEMS ||============================== //
 
@@ -48,6 +48,14 @@ const My_Menu = {
       type: 'item',
       url: '/rapport',
       icon: icons.IconReportAnalytics,
+      breadcrumbs: false
+    },
+    {
+      id: 'Wiki',
+      title: 'Wiki',
+      type: 'item',
+      url: '/wiki',
+      icon: icons.IconBooks,
       breadcrumbs: false
     },
     {

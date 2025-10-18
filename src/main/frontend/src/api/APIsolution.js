@@ -87,6 +87,10 @@ export const addSolution = (formData) => {
   return apisolution.post('', formData);
 };
 
+export const getWiki = (searchItem) => {
+  return apisolution.get(`/wiki/${searchItem}`, searchItem);
+};
+
 export const updateSolution = (userId, formData) => {
   return apisolution.put(`/${userId}`, (userId,formData));
 };

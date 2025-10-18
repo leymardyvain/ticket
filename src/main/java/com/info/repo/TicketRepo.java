@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.info.entities.Solution;
 import com.info.entities.Ticket;
 
 @Repository
@@ -22,7 +23,7 @@ public interface TicketRepo extends JpaRepository<Ticket, Long> {
 	
 	@Query("select u from Ticket u ORDER BY Id_ticket DESC")
 	List<Ticket> findAllTicket();
-
+	
 }
 
 

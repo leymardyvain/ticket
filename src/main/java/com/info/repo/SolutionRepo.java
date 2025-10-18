@@ -19,4 +19,7 @@ public interface SolutionRepo extends JpaRepository<Solution, Long> {
 	@Query("select u from Solution u where u.suivi_Ticket.Id_suivi_Ticket= :id")
 	List<Solution> findSolutionByIDSuiviTicket(Long id);
 	
+    @Query("SELECT u FROM Solution u WHERE LOWER(u.description_solution) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
+	List<Solution> findSolutionByDescription(String searchTerm);
+	
 }

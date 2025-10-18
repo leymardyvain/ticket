@@ -11,7 +11,6 @@ import { format } from "date-fns";
 import 'dayjs/locale/fr'; // Import the French locale from dayjs
 import ListSuiviRapport from '../ticket/ListAllTicketRecherche';
 import { getRapport } from '../../api/APIsuiviTicket';
-import GetUserRoles from '../pages/protect/GetUserRoles';
 import ProtectedAccessSuperviseur from '../pages/protect/ProtectedAccessSuperviseur';
 import ProtectedAccessAdmin from '../pages/protect/ProtectedAccessAdmin';
 import ProtectedAccessUser from '../pages/protect/ProtectedAccessUser';

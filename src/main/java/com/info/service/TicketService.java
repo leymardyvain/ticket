@@ -31,7 +31,7 @@ public class TicketService {
 	        Ticket Ticket = TicketRepo.findTicketByDescription(name);
 	        return Ticket;
 	    }
-	    
+	    	    
 	    public List<Ticket> getAllUserTicketByUsername(String username) {
 	    	List<Ticket> Ticket = TicketRepo.findAllTicketForUserByUsername(username);
 	        return Ticket;

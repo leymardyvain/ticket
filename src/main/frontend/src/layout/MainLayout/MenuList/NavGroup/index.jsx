@@ -116,6 +116,11 @@ export default function NavGroup({ item, lastItem, remItems, lastItemId, setSele
         if (menu.url === '/rapport') {
           return <NavItem key={menu.id} item={menu} level={1} />;
         }
+        if (menu.url === "/wiki") {
+          if (superviseur || admin || usernameAdmin === "admin") {
+            return <NavItem key={menu.id} item={menu} level={1} />;
+          }
+        }
         if (menu.url === "/personnel") {
           if (superviseur || usernameAdmin === "admin") {
             return <NavItem key={menu.id} item={menu} level={1} />;

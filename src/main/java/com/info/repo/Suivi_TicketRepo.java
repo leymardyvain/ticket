@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.info.entities.Suivi_Ticket;
+import com.info.entities.Ticket;
 
 @Repository
 public interface Suivi_TicketRepo extends JpaRepository<Suivi_Ticket, Long>, JpaSpecificationExecutor<Suivi_Ticket>  {
@@ -92,4 +93,9 @@ public interface Suivi_TicketRepo extends JpaRepository<Suivi_Ticket, Long>, Jpa
 	
 	@Query("select u from Suivi_Ticket u where u.personnel_assignateur.user.username= :username ORDER BY Id_suivi_Ticket DESC")
 	List<Suivi_Ticket> findSuiviTicketByPersonnelAssignateur(String username);
+	
+	/*************************** Wiki ******************************************************************/
+	
+    @Query("SELECT u FROM Suivi_Ticket u WHERE LOWER(u.ticket.description) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
+	List<Suivi_Ticket> findTicketByDescriptionWiki(String searchTerm);
 }

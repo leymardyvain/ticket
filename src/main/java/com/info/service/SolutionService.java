@@ -19,6 +19,10 @@ public class SolutionService {
 	public List<Solution> getAllSolutions() {
 		return SolutionRepo.findAll();
 	}
+	
+	public List<Solution> getWiki(String searchItem) {
+		return SolutionRepo.findSolutionByDescription(searchItem);
+	}
 
 	public Solution getSolutionById(Long id) {
 		try {

@@ -21,6 +21,7 @@ const UtilsShadow = Loadable(lazy(() => import('views/utilities/Shadow')));
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 
 // New page routing
+const Wiki = Loadable(lazy(() => import('views/wiki')));
 const UnauthorizedPage = Loadable(lazy(() => import('views/ticket/SuivreTicket.jsx')));
 const SuivreMesAssignations = Loadable(lazy(() => import('views/ticket/SuivreTicket.jsx')));
 const Assignation = Loadable(lazy(() => import('views/ticket/SuivreTicketSuperviseur.jsx')));
@@ -96,6 +97,10 @@ const MainRoutes = {
     {
       path: 'rapport',
       element: <ProtectedRoutes><Rapport /></ProtectedRoutes>
+    },
+    {
+      path: 'wiki',
+      element: <ProtectedRoutes><Wiki /></ProtectedRoutes>
     },
     {
       path: 'personnel',

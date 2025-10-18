@@ -1,5 +1,6 @@
 package com.info.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +50,21 @@ public class SolutionController {
 	@GetMapping
 	public ResponseEntity<List<Solution>> getAllSolutions() {
 		List<Solution> solutions = solutionService.getAllSolutions();
+		return ResponseEntity.ok(solutions);
+	}
+	
+	@GetMapping("/wiki/{searchItem}")
+	public ResponseEntity<List<Solution>> getAllSolutions(@PathVariable String searchItem) {
+		
+		List<Solution> solutions = new ArrayList<Solution>();
+		List<Suivi_Ticket> list_suivi_ticket_wiki = suivi_TicketService.getAllTicketByWiki(searchItem);
+		for(Suivi_Ticket suivi : list_suivi_ticket_wiki) {
+			List<Solution> solutionWiki = solutionService.getSolutionByID_suivi_Ticket(suivi.getId_suivi_Ticket());
+			
+			for(Solution solu : solutionWiki) {
+				solutions.add(solu);
+			}
+		}
 		return ResponseEntity.ok(solutions);
 	}
 

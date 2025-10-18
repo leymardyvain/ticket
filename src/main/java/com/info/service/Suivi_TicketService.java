@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.info.entities.Suivi_Ticket;
 import com.info.entities.Suivi_TicketSpecification;
+import com.info.entities.Ticket;
 import com.info.repo.Suivi_TicketRepo;
 
 @Service
@@ -153,6 +154,11 @@ public class Suivi_TicketService {
 		List<Suivi_Ticket> Suivi_TicketAdmin = Suivi_TicketRepo.findSuiviTicketByPersonnelEnCharge(username);
 		return Suivi_TicketAdmin;
 	}
+	
+    public List<Suivi_Ticket> getAllTicketByWiki(String searchItem) {
+    	List<Suivi_Ticket> suivi_Ticket = Suivi_TicketRepo.findTicketByDescriptionWiki(searchItem);
+        return suivi_Ticket;
+    }
 	
 	public List<Suivi_Ticket> getActivitesSuperviseur(String username) {
 		List<Suivi_Ticket> Suivi_TicketSup = Suivi_TicketRepo.findSuiviTicketByPersonnelAssignateur(username);
