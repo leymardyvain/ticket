@@ -46,7 +46,7 @@ pipeline {
 					sh 'docker-compose up --build -d'
         		}
       		}
-      	stage('Docker Push') {
+      /*	stage('Docker Push') {
       		steps {
         		withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           		sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
@@ -54,7 +54,7 @@ pipeline {
           		echo "image yleymard/spring_ticket pushed"
         	}
           }
-      }
+      }*/
 
 	}
 	post {

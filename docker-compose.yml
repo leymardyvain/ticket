@@ -1,179 +1,33 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  
   mysql:
-    
     image: mysql:8.0
-    
-    container_name: db_spring_ticket
-    
-    restart: unless-stopped
-        
     environment:
-      
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: infoDB
-      MYSQL_ROOT_HOST: "%"
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_USER: root
     ports:
       - "3308:3306"
-
     volumes:
-      - dbapp1:/var/lib/mysql
-      
-    networks:
-     springticketnetwork:
-      ipv4_address: 172.19.0.2
-      
-  spring_ticket:
-    
+      - mysql_data:/var/lib/mysql
+
+  spring-boot-app:
+    build: ./info
+    ports:
+      - "8788:8788"
     depends_on:
       - mysql
-      
-    build: ./
 
-    image: yleymard/spring_ticket:latest
-        
-    restart: on-failure
-    
+  node-app:
+    build: ./frontend
     ports:
-      - "8788"
-      
+      - "3000:3000" # Adjust port as needed
     environment:
-      SPRING_PROFILES_ACTIVE: prod
-        
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-    
-    networks:
-     springticketnetwork:
-      ipv4_address: 172.19.0.3
-    
-  spring_ticket_01:
-    
+      SPRING_BOOT_API_URL: http://spring-boot-app:8788 # Example for Node.js to communicate with Spring Boot
     depends_on:
-      - spring_ticket
-      
-    image: yleymard/spring_ticket:latest
-         
-    restart: on-failure
-    
-    ports:
-      - "8788"
-      
-    environment:
-      SPRING_PROFILES_ACTIVE: prod
-        
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-    
-    networks:
-     springticketnetwork:
-      ipv4_address: 172.19.0.4
+      - spring-boot-app # If Node.js depends on Spring Boot API
 
-  spring_ticket_02:
-    
-    depends_on:
-      - spring_ticket_01
-      
-    image: yleymard/spring_ticket:latest
-         
-    restart: on-failure
-        
-    ports:
-      - "8788"
-      
-    environment:
-      SPRING_PROFILES_ACTIVE: prod
-        
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-    
-    networks:
-     springticketnetwork:
-      ipv4_address: 172.19.0.5
-
-  spring_ticket_03:
-    
-    depends_on:
-      - spring_ticket_02
-      
-    image: yleymard/spring_ticket:latest
-         
-    restart: on-failure
-    
-    ports:
-      - "8788"
-      
-    environment:
-      SPRING_PROFILES_ACTIVE: prod
-        
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-    
-    networks:
-     springticketnetwork:
-      ipv4_address: 172.19.0.6
-
-  spring_ticket_04:
-    
-    depends_on:
-      - spring_ticket_03
-      
-    image: yleymard/spring_ticket:latest
-         
-    restart: on-failure
-    
-    ports:
-      - "8788"
-      
-    environment:
-      SPRING_PROFILES_ACTIVE: prod
-        
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-    
-    networks:
-     springticketnetwork:
-      ipv4_address: 172.19.0.7
-
-  hapee-3.1:
-   build:
-    context: .
-    dockerfile: ./haproxy.Dockerfile
-
-   depends_on:
-      - spring_ticket_04
-      
-   ports:
-      - "8788:8788"
-      - "9092:9092"
-
-   restart: always
-      
-   networks:
-    springticketnetwork:
-     ipv4_address: 172.19.0.10
-      
 volumes:
-  dbapp1:
-  
-networks:
- springticketnetwork:
-  driver: bridge
-  ipam:
-   config:
-    - subnet: 172.19.0.0/16
-      gateway: 172.19.0.1
+  mysql_data:
