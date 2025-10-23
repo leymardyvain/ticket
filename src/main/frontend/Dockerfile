@@ -9,4 +9,4 @@
     
     COPY . .
     
-    CMD ["node", "src/index.js"] # Adjust based on your entry point
+    CMD ["npm", "start"]
