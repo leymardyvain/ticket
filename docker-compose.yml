@@ -151,10 +151,15 @@ services:
      - springticketnetwork
 
   hapee-3.1:
+   
    build:
+    
     context: .
+    
     dockerfile: ./haproxy.Dockerfile
 
+   container_name: haproxy
+   
    depends_on:
       - webserver05
       
