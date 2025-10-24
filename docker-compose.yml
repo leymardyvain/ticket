@@ -24,10 +24,9 @@ services:
       - dbapp1:/var/lib/mysql
       
     networks:
-     springticketnetwork:
-      ipv4_address: 172.19.0.2
+     - springticketnetwork
       
-  spring_ticket:
+  webserver01:
     
     depends_on:
       - mysql
@@ -35,7 +34,7 @@ services:
     build: ./
 
     image: yleymard/spring_ticket:latest
-        
+    
     restart: on-failure
     
     ports:
@@ -50,13 +49,12 @@ services:
     tty: true
     
     networks:
-     springticketnetwork:
-      ipv4_address: 172.19.0.3
+     - springticketnetwork
     
-  spring_ticket_01:
+  webserver02:
     
     depends_on:
-      - spring_ticket
+      - webserver01
       
     image: yleymard/spring_ticket:latest
          
@@ -74,13 +72,12 @@ services:
     tty: true
     
     networks:
-     springticketnetwork:
-      ipv4_address: 172.19.0.4
+     - springticketnetwork
 
-  spring_ticket_02:
+  webserver03:
     
     depends_on:
-      - spring_ticket_01
+      - webserver02
       
     image: yleymard/spring_ticket:latest
          
@@ -98,13 +95,12 @@ services:
     tty: true
     
     networks:
-     springticketnetwork:
-      ipv4_address: 172.19.0.5
+     - springticketnetwork
 
-  spring_ticket_03:
+  webserver04:
     
     depends_on:
-      - spring_ticket_02
+      - webserver03
       
     image: yleymard/spring_ticket:latest
          
@@ -122,13 +118,12 @@ services:
     tty: true
     
     networks:
-     springticketnetwork:
-      ipv4_address: 172.19.0.6
+     - springticketnetwork
 
-  spring_ticket_04:
+  webserver05:
     
     depends_on:
-      - spring_ticket_03
+      - webserver04
       
     image: yleymard/spring_ticket:latest
          
@@ -146,8 +141,7 @@ services:
     tty: true
     
     networks:
-     springticketnetwork:
-      ipv4_address: 172.19.0.7
+     - springticketnetwork
 
   hapee-3.1:
    build:
@@ -155,7 +149,7 @@ services:
     dockerfile: ./haproxy.Dockerfile
 
    depends_on:
-      - spring_ticket_04
+      - webserver05
       
    ports:
       - "8788:8788"
@@ -164,8 +158,7 @@ services:
    restart: always
       
    networks:
-    springticketnetwork:
-     ipv4_address: 172.19.0.10
+    - springticketnetwork
       
 volumes:
   dbapp1:
@@ -173,7 +166,3 @@ volumes:
 networks:
  springticketnetwork:
   driver: bridge
-  ipam:
-   config:
-    - subnet: 172.19.0.0/16
-      gateway: 172.19.0.1
