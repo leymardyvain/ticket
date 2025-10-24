@@ -27,15 +27,15 @@ services:
      - springticketnetwork
       
   webserver01:
-	
+
     depends_on:
       - mysql
       
     build: ./
 
     image: yleymard/spring_ticket:latest
-	
-	container_name: webserver01
+
+    container_name: webserver01
     
     restart: on-failure
     
@@ -59,8 +59,8 @@ services:
       - webserver01
       
     image: yleymard/spring_ticket:latest
-	
-	container_name: webserver02
+
+    container_name: webserver02
          
     restart: on-failure
     
@@ -84,8 +84,8 @@ services:
       - webserver02
       
     image: yleymard/spring_ticket:latest
-	
-	container_name: webserver03
+
+    container_name: webserver03
          
     restart: on-failure
         
@@ -108,9 +108,9 @@ services:
     depends_on:
       - webserver03
       
-    image: yleymard/spring_ticket:
+    image: yleymard/spring_ticket
 
-	container_name: webserver04
+    container_name: webserver04
          
     restart: on-failure
     
@@ -134,8 +134,8 @@ services:
       - webserver04
       
     image: yleymard/spring_ticket:latest
-	
-	container_name: webserver05
+
+    container_name: webserver05
          
     restart: on-failure
     
