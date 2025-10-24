@@ -25,13 +25,14 @@ services:
       
     networks:
      - springticketnetwork
+
+  App:
+   
+    build: ./
+   
+    image: yleymard/spring_ticket:latest
       
   webserver01:
-
-    depends_on:
-      - mysql
-      
-    build: ./
 
     image: yleymard/spring_ticket:latest
 
