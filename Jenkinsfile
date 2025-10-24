@@ -13,13 +13,6 @@ pipeline {
 					url: 'https://github.com/leymardyvain/ticket.git'
         		}
     		}
-    	stage('Grant Docker Socket Permissions') {
-            steps {
-                script {
-                    sh 'sudo chmod 666 /var/run/docker.sock'
-                }
-            }
-        }
 		stage('Stop app container spring_ticket') {
 			steps {
 				echo 'starting stop container ...'
