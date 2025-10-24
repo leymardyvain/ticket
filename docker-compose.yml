@@ -25,14 +25,10 @@ services:
       
     networks:
      - springticketnetwork
-
-  App:
-   
-    build: ./
-   
-    image: yleymard/spring_ticket:latest
       
   webserver01:
+
+    build: ./
 
     image: yleymard/spring_ticket:latest
 
@@ -109,7 +105,7 @@ services:
     depends_on:
       - webserver03
       
-    image: yleymard/spring_ticket
+    image: yleymard/spring_ticket:latest
 
     container_name: webserver04
          
