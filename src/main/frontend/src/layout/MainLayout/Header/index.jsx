@@ -14,6 +14,7 @@ import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
 
 // assets
 import { IconMenu2 } from '@tabler/icons-react';
+import { Grid, Typography } from '@mui/material';
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
@@ -29,7 +30,9 @@ export default function Header() {
       {/* logo & toggler button */}
       <Box sx={{ width: downMD ? 'auto' : 228, display: 'flex' }}>
         <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
-          <LogoSection />
+          <LogoSection /><span style={{ color: '#7e57c2', fontSize: '16px', fontWeight: 'bold' }}>
+            Gesincidents
+          </span>
         </Box>
         <Avatar
           variant="rounded"
