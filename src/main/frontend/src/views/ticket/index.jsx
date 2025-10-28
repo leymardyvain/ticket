@@ -230,7 +230,7 @@ function Ticket() {
                         Suivre mes tickets
                     </Button>
                 </Grid>
-                <Grid size={8}>
+                <Grid size={{ xs: 12, md: 8 }}>
                     <MainCard title="Nouveau ticket">
                         <Stack spacing={2}>
                             <TextField fullWidth
@@ -247,7 +247,7 @@ function Ticket() {
                         </Stack>
                     </MainCard>
                 </Grid>
-                <Grid size={4}>
+                <Grid size={{ xs: 12, md: 4 }}>
                     <Stack spacing={2}>
                         <MainCard title="Type Ticket">
                             <Stack spacing={2}>
@@ -314,7 +314,7 @@ function Ticket() {
                         <DropzoneComponent setFiles={setFiles} files={files} />
                     </MainCard>
                 </Grid>}
-                <Grid size={4}>
+                <Grid size={{ xs: 12, md: 4 }}>
                     <Button
                         onClick={handlesubmit}
                         variant="contained"

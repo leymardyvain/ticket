@@ -5,7 +5,7 @@ import MainCard from 'ui-component/cards/MainCard';
 function StepThreeForm() {
     return (
         <Grid container spacing={2}>
-            <Grid size={8}>
+            <Grid size={{ xs: 12, md: 8 }}>
                 <MainCard></MainCard>
             </Grid>
         </Grid>

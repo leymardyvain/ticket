@@ -90,7 +90,7 @@ function Societe() {
         {isAddedSociete && <MainCard title="Nouvelle Societe">
 
           <Stack spacing={2}>
-            <Grid size={8}>
+            <Grid size={{ xs: 12, md: 8 }}>
               <TextField
                 label="Nom societe"
                 id="outlined-size-small01"
@@ -146,7 +146,7 @@ function Societe() {
 
             </Grid>
 
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 3 }}>
 
               <Button
                 onClick={handlesubmit}

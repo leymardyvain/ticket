@@ -70,7 +70,7 @@ function StepRoleInfo({ roles, selectedroles, setSelectedroles, formData, setFor
     return (
         <MainCard title="Type utilisateur">
             <Grid container spacing={2}>
-                <Grid size={8}>
+                <Grid size={{ xs: 12, md: 8 }}>
                     <MainCard>
                         <FormGroup>
                             <Grid container spacing={2}>

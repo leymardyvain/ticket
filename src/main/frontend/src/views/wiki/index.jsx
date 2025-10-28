@@ -104,7 +104,7 @@ export default function Wiki() {
                  <Typography component="h1">{solution.length} élement(s) trouvé(s)</Typography>
                 {solution.map((sol) =>
                     <Accordion key={sol.id_solution} expanded={expanded === `panel${sol.id_solution}`} onChange={handleChange(`panel${sol.id_solution}`)}>
-                        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+                        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" sx={{ backgroundColor: '#fffffbff' }}>
                             <Stack direction="row" spacing={2}>
                                 <Stack spacing={2}>
                                     <Typography component="span"><IconUserCircle /> {sol.suivi_Ticket.ticket.personnel.nom_personnel}</Typography>

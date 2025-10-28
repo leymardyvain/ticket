@@ -54,13 +54,13 @@ function StepDetailsInfo({ formData, setFormData, selectedroles, setOpen, open, 
     return (
         <MainCard title="Details informations saisies">
             <Grid container spacing={3}>
-                <Grid size={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                     <TextField label="Nom personnel" fullWidth size='small' value={formData.nom_personnel}></TextField>
                 </Grid>
-                <Grid size={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                     <TextField label="Nom departement" fullWidth size='small' value={formData.departement.nom_departement}></TextField>
                 </Grid>
-                <Grid size={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                     Type utilisateur
                     <FormControl fullWidth>
 
@@ -93,7 +93,7 @@ function StepDetailsInfo({ formData, setFormData, selectedroles, setOpen, open, 
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid size={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                     <Stack spacing={3}>
                         <TextField label="Username" fullWidth size='small' value={formData.user.username}></TextField>
                         <TextField

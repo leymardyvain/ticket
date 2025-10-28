@@ -30,7 +30,7 @@ function StepAccessInfo({ setFormData, formData, isError, isUsernameExist, sever
                         {message}
                     </Alert>
                 </Grid>}
-                <Grid size={8}>
+                <Grid size={{ xs: 12, md: 8 }}>
                     <MainCard>
                         <Stack spacing={3}>
                             <TextField

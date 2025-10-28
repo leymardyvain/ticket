@@ -227,7 +227,7 @@ function Rapport() {
                                     )}
                                 />
                             </Grid>}
-                            <Grid size={6}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                                 <Autocomplete
                                     options={etat_Ticket}
                                     getOptionLabel={(option) => option.nom_etat_Ticket} // Use the 'title' property as the label
@@ -239,7 +239,7 @@ function Rapport() {
                                     )}
                                 />
                             </Grid>
-                            <Grid size={6}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                                 <Autocomplete
                                     options={type_Ticket}
                                     getOptionLabel={(option) => option.nom_type_Ticket} // Use the 'title' property as the label
@@ -251,7 +251,7 @@ function Rapport() {
                                     )}
                                 />
                             </Grid>
-                            <Grid size={6}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                                 <Autocomplete
                                     options={niveau_criticite}
                                     getOptionLabel={(option) => option.nom_niveau_criticite} // Use the 'title' property as the label
@@ -263,7 +263,7 @@ function Rapport() {
                                     )}
                                 />
                             </Grid>
-                            <Grid size={3}>
+                            <Grid size={{ xs: 12, md: 3 }}>
                                 <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='fr'>
                                     <DatePicker
                                         label="A partir du :"
@@ -275,7 +275,7 @@ function Rapport() {
                                 </LocalizationProvider>
                             </Grid>
 
-                            <Grid size={3}>
+                            <Grid size={{ xs: 12, md: 3 }}>
                                 <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='fr'>
                                     <DatePicker
                                         label="Au :"
@@ -285,7 +285,7 @@ function Rapport() {
                                     />
                                 </LocalizationProvider>
                             </Grid>
-                            <Grid size={6}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                                 <Autocomplete
                                     options={personnel_assignateur}
                                     getOptionLabel={(option) => option.nom_personnel} // Use the 'title' property as the label
@@ -297,7 +297,7 @@ function Rapport() {
                                     )}
                                 />
                             </Grid>
-                            <Grid size={6}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                                 <Autocomplete
                                     options={personnel_en_charge}
                                     getOptionLabel={(option) => option.nom_personnel} // Use the 'title' property as the label
@@ -312,7 +312,7 @@ function Rapport() {
 
                         </Grid>
 
-                        <Grid size={3}>
+                        <Grid size={{ xs: 12, md: 3 }}>
 
                             <Button
                                 type='submit'

@@ -54,7 +54,7 @@ function StepPersonnelInfo({ handleChange, setFormData, formData, isError, ville
     return (
         <MainCard title="Information utilisateur">
             <Grid container spacing={2}>
-                <Grid size={8}>
+                <Grid size={{ xs: 12, md: 8 }}>
                     <MainCard>
                         <Stack spacing={3}>
                             <TextField

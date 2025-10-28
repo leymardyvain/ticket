@@ -71,7 +71,7 @@ function Ville() {
          {isAddedVille && <MainCard title="Nouvelle Ville">
 
           <Stack spacing={2}>
-            <Grid size={8}>
+            <Grid size={{ xs: 12, md: 8 }}>
               <TextField
                 label="Nom ville"
                 id="outlined-size-small01"
@@ -93,7 +93,7 @@ function Ville() {
                 }}
               />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 3 }}>
 
               <Button
                 onClick={handlesubmit}

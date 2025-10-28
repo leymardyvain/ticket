@@ -136,15 +136,15 @@ export default function AuthLogin() {
           />
         </Grid>
         <Grid>
-          <Typography variant="subtitle1" component={Link} to="/forgot-password" color="secondary" sx={{ textDecoration: 'none' }}>
+         {/* <Typography variant="subtitle1" component={Link} to="/forgot-password" color="secondary" sx={{ textDecoration: 'none' }}>
             Forgot Password?
-          </Typography>
+          </Typography> */}
         </Grid>
       </Grid>
       <Box sx={{ mt: 2 }}>
         <AnimateButton>
           <Button onClick={handleSubmit} color="secondary" fullWidth size="large" type="submit" variant="contained">
-            Sign In
+            Se connecter
           </Button>
         </AnimateButton>
       </Box>
