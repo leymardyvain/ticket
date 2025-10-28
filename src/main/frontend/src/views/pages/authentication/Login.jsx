@@ -13,6 +13,7 @@ import AuthLogin from '../auth-forms/AuthLogin';
 
 import Logo from 'ui-component/Logo';
 import AuthFooter from 'ui-component/cards/AuthFooter';
+import MyLogo from '../../../ui-component/MyLogo';
 
 // ================================|| AUTH3 - LOGIN ||================================ //
 
@@ -29,7 +30,7 @@ export default function Login() {
                 <Grid container spacing={2} sx={{ alignItems: 'center', justifyContent: 'center' }}>
                   <Grid sx={{ mb: 3 }}>
                     <Link to="#" aria-label="logo">
-                      <Logo />
+                      <MyLogo />
                     </Link>
                   </Grid>
                   <Grid size={12}>
@@ -37,10 +38,10 @@ export default function Login() {
                       <Grid>
                         <Stack spacing={1} sx={{ alignItems: 'center', justifyContent: 'center' }}>
                           <Typography gutterBottom variant={downMD ? 'h3' : 'h2'} sx={{ color: 'secondary.main' }}>
-                            Hi, Welcome Back
+                            Bonjour, bon  retour parmi nous
                           </Typography>
                           <Typography variant="caption" sx={{ fontSize: '16px', textAlign: { xs: 'center', md: 'inherit' } }}>
-                            Enter your credentials to continue
+                            Veuillez entrer vos identifications
                           </Typography>
                         </Stack>
                       </Grid>

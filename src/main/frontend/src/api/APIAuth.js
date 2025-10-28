@@ -109,6 +109,11 @@ apiauth.interceptors.response.use(
 );*/
 
 // API endpoints
+
+export const getUserConnexion = (username, password) => {
+  return apiauth.post(`/login?username=` + username + `&password=` + password, (username, password));
+};
+
 export const getUser = (username) => {
   return apiauth.get(`/getuserByUsername/${username}`);
 };

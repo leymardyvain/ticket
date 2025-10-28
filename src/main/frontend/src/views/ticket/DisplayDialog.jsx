@@ -4,6 +4,7 @@ import { getCountFichier, getDownloadFileName, getFichierByIDTicket } from "../.
 import { IconCircleX, IconDownload, IconEye, IconPlaystationX } from "@tabler/icons-react";
 import { development, production } from 'api/connexion';
 import axios from "axios";
+import AffichageFichier from "./Fichier";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -95,13 +96,12 @@ export default function DisplayDialog({ open, setOpen, data }) {
 
     const fetchDataImageData = async () => {
         try {
-                        /*  const response = await getSolutionBySuiviTicket(data?.id_suivi_Ticket);
-                setListeSolution(response.data);
-                console.log('response :', response.data);*/
+            /*  const response = await getSolutionBySuiviTicket(data?.id_suivi_Ticket);
+    setListeSolution(response.data);
+    console.log('response :', response.data);*/
             if (data?.ticket?.id_ticket) {
                 const response = await getFichierByIDTicket(data?.ticket?.id_ticket);
                 setListFichier(response.data);
-                console.log('response :', response.data);
             }
         } catch (error) {
             console.error('Error fetching ImageData:', error);
@@ -227,22 +227,21 @@ export default function DisplayDialog({ open, setOpen, data }) {
 
                     {isSelectedIMG && <div style={{ padding: '20px' }}>
 
-                        <div style={{ display: 'flex' }}>
+                        {/* IMG viewer */}
 
-                            {/* PDF viewer */}
-                            <div style={{ width: '100%' }}>
-
-                                {imageUrl && (
-                                    <iframe
-                                        src={imageUrl}
-                                        width="100%"
-                                        height="450px"
-                                        title="PDF Viewer"
-                                        style={{ border: '1px solid #ccc' }}
-                                    />
-                                )}
-                            </div>
+                        {imageUrl && (<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <AffichageFichier src={imageUrl} />
                         </div>
+                        )}
+                        {/*imageUrl && (<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                                    <iframe
+                                        src={imageUrl} // Or directly to an image URL if the browser supports it
+                                        title="Centered Image"
+                                        style={{ width: '80%', height: '80%', border: '1px solid #ccc', }}
+                                    ></iframe>
+                                </div>
+                        )*/}
+
                     </div>
                     }
 

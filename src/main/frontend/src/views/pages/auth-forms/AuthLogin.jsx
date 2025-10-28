@@ -25,6 +25,7 @@ import { development, production } from '../../../api/connexion';
 import axios from 'axios';
 import encryptAES from '../Encrypt/authEncrypt';
 import { Alert } from '@mui/material';
+import { getUserConnexion } from '../../../api/APIAuth';
 
 // ===============================|| JWT - LOGIN ||=============================== //
 
@@ -56,9 +57,11 @@ export default function AuthLogin() {
 
     try {
 
-      let rurl = process.env.NODE_ENV ==="development" ? development() : production() ;
+     // let rurl = process.env.NODE_ENV === "development" ? development() : production();
 
-      axios.post(`${rurl}/login?username=` + username + `&password=` + password)
+     // axios.post(`${rurl}/login?username=` + username + `&password=` + password)
+
+      await getUserConnexion(username, password)
 
         .then((response) => {
 
@@ -90,14 +93,14 @@ export default function AuthLogin() {
 
   return (
     <>
-    {message && <Alert severity={severity}>{message}</Alert>}
+      {message && <Alert severity={severity}>{message}</Alert>}
       <FormControl fullWidth sx={{ ...theme.typography.customInput }}>
         <InputLabel htmlFor="outlined-adornment-email-login">Username</InputLabel>
-        <OutlinedInput id="outlined-adornment-email-login" 
-        type="email" 
-        value={username} 
-        name="username"
-        onChange={(e) => setUsername(e.target.value) } />
+        <OutlinedInput id="outlined-adornment-email-login"
+          type="email"
+          value={username}
+          name="username"
+          onChange={(e) => setUsername(e.target.value)} />
       </FormControl>
 
       <FormControl fullWidth sx={{ ...theme.typography.customInput }}>
@@ -106,7 +109,7 @@ export default function AuthLogin() {
           id="outlined-adornment-password-login"
           type={showPassword ? 'text' : 'password'}
           value={password}
-          onChange={(e) => setPassword(e.target.value) }
+          onChange={(e) => setPassword(e.target.value)}
           name="password"
           endAdornment={
             <InputAdornment position="end">
