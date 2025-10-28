@@ -13,24 +13,24 @@ pipeline {
 					url: 'https://github.com/leymardyvain/ticket.git'
         		}
     		}
-		stage('Stop app container spring_ticket') {
+		stage('Stop app container') {
 			steps {
-				echo 'starting stop container ...'
+				echo 'starting stop app container ...'
 				sh 'docker ps -f name=webserver -q | xargs --no-run-if-empty docker container stop'
 				sh 'docker container ls -a -f name=webserver -q | xargs -r docker container rm'
         		}
       		}
-		stage('Stop db container db_spring_ticket') {
+		stage('Stop db container') {
 			steps {
-				echo 'starting stop container ...'
+				echo 'starting stop db container ...'
 				sh 'docker ps -f name=dbserver -q | xargs --no-run-if-empty docker container stop'
 				sh 'docker container ls -a -f name=dbserver -q | xargs -r docker container rm'
 				sh 'docker system prune -a -f'	
         		}
       		}
-      	stage('Stop haproxy loadbalancer') {
+      	stage('Stop haproxy loadbalancer container') {
 			steps {
-				echo 'starting stop container ...'
+				echo 'starting stop haproxy container ...'
 				sh 'docker ps -f name=haproxy -q | xargs --no-run-if-empty docker container stop'
 				sh 'docker container ls -a -f name=haproxy -q | xargs -r docker container rm'
 				sh 'docker system prune -a -f'	
