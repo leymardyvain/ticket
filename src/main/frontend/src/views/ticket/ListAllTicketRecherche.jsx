@@ -214,7 +214,7 @@ const ListSuiviRapport = ({ suivi })  => {
                                         <TableCell align="left">
                                             <TableSortLabel
                                                 active={orderBy === 'description'}
-                                                direction={orderBy === 'description' ? order : 'asc'}
+                                                direction={orderBy === 'description' ? order : 'desc'}
                                                 onClick={() => handleSort('description')} >
                                                 Description
                                             </TableSortLabel></TableCell>

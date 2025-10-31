@@ -237,7 +237,7 @@ export default function ListVille({ VilleAdded, isVilleAdded }) {
                                 <TableCell align="left">
                                     <TableSortLabel
                                         active={orderBy === 'nom_ville'}
-                                        direction={orderBy === 'nom_ville' ? order : 'asc'}
+                                        direction={orderBy === 'nom_ville' ? order : 'desc'}
                                         onClick={() => handleSort('nom_ville')}
                                     >
                                         Nom
