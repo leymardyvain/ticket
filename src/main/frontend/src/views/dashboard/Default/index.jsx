@@ -265,12 +265,9 @@ export default function Dashboard() {
           <Grid size={{ lg: 4, md: 6, sm: 6, xs: 12 }}>
             <TotalTicketEnCoursResolution isLoading={isLoading} listTicket={listTicketEnCoursResolution} />
           </Grid>
-          <Grid size={{ lg: 4, md: 6, sm: 6, xs: 12 }}>
+          <Grid size={{ lg: 4, md: 12, sm: 12, xs: 12 }}>
             <TotalTicketResolu isLoading={isLoading} listTicket={listTicketResolu} />
           </Grid>
-          {/* <Grid size={{ lg: 4, md: 6, sm: 6, xs: 12 }}>
-            <TotalOrderLineChartCard isLoading={isLoading} />
-          </Grid> */}
           <Grid size={{ lg: 4, md: 12, sm: 12, xs: 12 }}>
             <Grid container spacing={gridSpacing}>
               <Grid size={{ sm: 6, xs: 12, md: 6, lg: 12 }}>
