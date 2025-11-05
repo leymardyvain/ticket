@@ -1,6 +1,6 @@
 #FROM jdk-17 # for java 17
 
-FROM openjdk:17-alpine
+FROM openjdk:26-ea-trixie
 
 WORKDIR /app
 
