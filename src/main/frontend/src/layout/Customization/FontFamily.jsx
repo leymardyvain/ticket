@@ -42,7 +42,7 @@ export default function FontFamilyPage() {
 
   return (
     <Stack spacing={2.5} sx={{ p: 2, width: '100%' }}>
-      <Typography variant="h5">FONT STYLE</Typography>
+      <Typography variant="h5">Polices de theme</Typography>
       <RadioGroup aria-label="payment-card" name="payment-card" value={fontFamily} onChange={handleFontChange}>
         <Grid container spacing={1.25}>
           {fonts.map((item, index) => (

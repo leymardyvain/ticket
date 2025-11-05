@@ -191,7 +191,7 @@ export default function NotificationSection() {
                         <Grid container sx={{ alignItems: 'center', justifyContent: 'space-between', pt: 2, px: 2 }}>
                           <Grid>
                             <Stack direction="row" spacing={2}>
-                              <Typography variant="subtitle1">Toutes mes notifications</Typography>
+                              <Typography variant="subtitle1">{ listNotification.length > 0 ? "Toutes mes notifications" : "Aucune notification" }</Typography>
                               <Chip size="small" label={listNotification.length} sx={{ color: 'background.default', bgcolor: 'warning.dark' }} />
                             </Stack>
                           </Grid>

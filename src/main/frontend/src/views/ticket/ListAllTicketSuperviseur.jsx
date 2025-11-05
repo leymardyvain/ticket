@@ -1,5 +1,5 @@
-import { Button, Chip, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, TextField, Tooltip } from '@mui/material'
-import { IconAccessible, IconArrowAutofitContent, IconArrowsMinimize, IconCircleCheck, IconCirclePlus, IconClock, IconClockSearch, IconDirections, IconEye, IconEyeglass, IconPlaystationX, IconSettingsAutomation, IconTransferIn } from '@tabler/icons-react';
+import { Button, Chip, Grid, IconButton, Menu, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, TextField, Tooltip } from '@mui/material'
+import { IconAccessible, IconArrowAutofitContent, IconArrowsMinimize, IconCircleCheck, IconCirclePlus, IconClock, IconClockSearch, IconDirections, IconDotsVertical, IconEye, IconEyeglass, IconPlaystationX, IconSettingsAutomation, IconTransferIn } from '@tabler/icons-react';
 import React, { useState } from 'react'
 import MainCard from 'ui-component/cards/MainCard';
 import { getSuivi_Ticket_Superviseur, getSuivi_Ticket_Superviseur_All_Etat } from '../../api/APIsuiviTicket';
@@ -13,6 +13,18 @@ import DisplayHistoriqueDialog from './DisplayHistoriqueDialog';
 import DisplaySolutionDialog from './DisplaySolutionDialog';
 
 function ListSuiviSuperviseur() {
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const open = Boolean(anchorEl);
+
+    const handleClickMenuDrop = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleCloseMenuDrop = () => {
+        setAnchorEl(null);
+    };
 
     const [openSolution, setOpenSolution] = useState(false);
 
@@ -272,30 +284,61 @@ function ListSuiviSuperviseur() {
                                                         size='small' label={row.etat_Ticket.nom_etat_Ticket} />
                                                 </TableCell>
                                                 <TableCell align='left'>
-                                                    <Tooltip title="Voir">
+                                                   {/*<Tooltip title="Voir">
                                                         <IconButton aria-label="voir"
                                                             size="small"
                                                             sx={{ bgcolor: '#f0f1f5ff', color: "#486de7ff", marginRight: "2px" }}
                                                             onClick={() => Displaydetails(row)}>
                                                             <IconEye fontSize="inherit" style={{ strokeWidth: "2" }} />
                                                         </IconButton>
-                                                    </Tooltip>
-                                                    <Tooltip title="Afficher historique">
+                                                    </Tooltip>*/}
+                                                    {/*<Tooltip title="Afficher historique">
                                                         <IconButton aria-label="historique"
                                                             size="small"
                                                             sx={{ bgcolor: '#f4e8f8ff', color: "#a310ccff", marginRight: "2px" }}
                                                             onClick={() => Displayhistorique(row)}>
                                                             <IconArrowsMinimize fontSize="inherit" style={{ strokeWidth: "2" }} />
                                                         </IconButton>
-                                                    </Tooltip>
-                                                    {(row.etat_Ticket.nom_etat_Ticket === "Résolu" || row.etat_Ticket.nom_etat_Ticket === "Fermé") && <Tooltip title="Afficher la solution">
-                                                        <IconButton aria-label="afficher"
-                                                            size="large"
-                                                            sx={{ bgcolor: '#e3f5edff', color: "#10a35eff", marginRight: "2px" }}
-                                                            onClick={() => DisplaySolution(row)}>
-                                                            <IconEyeglass fontSize="inherit" style={{ strokeWidth: "2" }} />
+                                                    </Tooltip>*/}
+                                                    {/*(row.etat_Ticket.nom_etat_Ticket === "Résolu" || row.etat_Ticket.nom_etat_Ticket === "Fermé") &&
+                                                        <Tooltip title="Afficher la solution">
+                                                            <IconButton aria-label="afficher"
+                                                                size="large"
+                                                                sx={{ bgcolor: '#e3f5edff', color: "#10a35eff", marginRight: "2px" }}
+                                                                onClick={() => DisplaySolution(row)}>
+                                                                <IconEyeglass fontSize="inherit" style={{ strokeWidth: "2" }} />
+                                                            </IconButton>
+                                                        </Tooltip>*/}
+                                                    <Tooltip title="Action">
+                                                        <IconButton
+                                                            id="basic-button"
+                                                            aria-controls={open ? 'basic-menu' : undefined}
+                                                            aria-haspopup="true"
+                                                            aria-expanded={open ? 'true' : undefined}
+                                                            //  sx={{ marginRight: "2px", borderWidth: 2, borderStyle: 'solid'  }}
+                                                            onClick={handleClickMenuDrop}
+                                                        >
+                                                            <IconDotsVertical fontSize="inherit" style={{ strokeWidth: "2" }} />
                                                         </IconButton>
-                                                    </Tooltip>}
+                                                        <Menu
+                                                            id="basic-menu"
+                                                            anchorEl={anchorEl}
+                                                            open={open}
+                                                            onClose={handleCloseMenuDrop}
+                                                            slotProps={{
+                                                                list: {
+                                                                    'aria-labelledby': 'basic-button',
+                                                                },
+                                                            }}
+                                                        >
+                                                            <MenuItem onClick={() => Displaydetails(row)}>Voir</MenuItem>
+                                                            <MenuItem onClick={() => Displayhistorique(row)}>Afficher historique</MenuItem>
+                                                            {(row.etat_Ticket.nom_etat_Ticket === "Résolu" || row.etat_Ticket.nom_etat_Ticket === "Fermé") &&
+                                                                <MenuItem onClick={() => DisplaySolution(row)}>Afficher solution</MenuItem>
+                                                            }
+                                                        </Menu>
+
+                                                    </Tooltip>
                                                 </TableCell>
                                             </TableRow>
                                         )}

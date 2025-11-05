@@ -1,5 +1,5 @@
-import { Button, Chip, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, TextField, Tooltip } from '@mui/material'
-import { IconAccessible, IconArrowAutofitContent, IconBan, IconChecklist, IconCircleCheck, IconCirclePlus, IconClock, IconDirections, IconDoor, IconEye, IconPlaystationX, IconSettingsAutomation } from '@tabler/icons-react';
+import { Box, Button, Chip, Grid, IconButton, Menu, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, TextField, Tooltip } from '@mui/material'
+import { IconAccessible, IconArrowAutofitContent, IconBan, IconChecklist, IconCircleCheck, IconCirclePlus, IconClock, IconDirections, IconDoor, IconDotsVertical, IconEye, IconPlaystationX, IconSettingsAutomation } from '@tabler/icons-react';
 import React, { useState } from 'react'
 import MainCard from 'ui-component/cards/MainCard';
 import { getSuivi_Ticket } from '../../api/APIsuiviTicket';
@@ -11,8 +11,21 @@ import DisplayUserDialog from './DisplayUserDialog';
 import ConfirmationDialog from './ConfirmationDialog';
 import ConfirmationUserDialog from './ConfirmationUserDialog';
 import AnnulationUserDialog from './AnnulationUserDialog';
+import Dropdown from './Dropdown ';
 
 function ListTicket({ handlePage }) {
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const open = Boolean(anchorEl);
+
+    const handleClickMenuDrop = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleCloseMenuDrop = () => {
+        setAnchorEl(null);
+    };
 
     const [page, setPage] = React.useState(0);
 
@@ -192,6 +205,16 @@ function ListTicket({ handlePage }) {
         }
     };
 
+
+    const getIsResolution = (etat) => {
+        switch (etat) {
+            case 'Résolu':
+                return "block";
+            default:
+                return "none"; // Default style or no style
+        }
+    };
+
     const sortedData = stableSort(filteredTicket, getComparator(order, orderBy));
 
     return (
@@ -263,30 +286,7 @@ function ListTicket({ handlePage }) {
                                                         size='small' label={row.etat_Ticket.nom_etat_Ticket} />
                                                 </TableCell>
                                                 <TableCell align='left'>
-                                                    <Tooltip title="Voir">
-                                                        <IconButton aria-label="voir"
-                                                            size="large"
-                                                            sx={{ bgcolor: '#f0f1f5ff', color: "#486de7ff", marginRight: "2px" }}
-                                                            onClick={() => Displaydetails(row)}>
-                                                            <IconEye fontSize="inherit" style={{ strokeWidth: "2" }} />
-                                                        </IconButton>
-                                                    </Tooltip>
-                                                    {row.etat_Ticket.nom_etat_Ticket === "Résolu" && <Tooltip title="Confirmer résolution">
-                                                        <IconButton aria-label="fermer"
-                                                            size="large"
-                                                            sx={{ bgcolor: '#f0f1f5ff', color: "#1c992eff", marginRight: "2px" }}
-                                                            onClick={() => Displayconfirmation(row)}>
-                                                            <IconDoor fontSize="inherit" style={{ strokeWidth: "2" }} />
-                                                        </IconButton>
-                                                    </Tooltip>}
-                                                    {row.etat_Ticket.nom_etat_Ticket === "Résolu" && <Tooltip title="Problème non résolu">
-                                                        <IconButton aria-label="fermer"
-                                                            size="large"
-                                                            sx={{ bgcolor: '#f0f1f5ff', color: "#b12d21ff", marginRight: "2px" }}
-                                                            onClick={() => DisplayAnnulation(row)}>
-                                                            <IconBan fontSize="inherit" style={{ strokeWidth: "2" }} />
-                                                        </IconButton>
-                                                    </Tooltip>}
+                                                     <Dropdown  row={row} Displaydetails={Displaydetails} Displayconfirmation={Displayconfirmation} DisplayAnnulation={DisplayAnnulation} />
                                                 </TableCell>
                                             </TableRow>
                                         )}

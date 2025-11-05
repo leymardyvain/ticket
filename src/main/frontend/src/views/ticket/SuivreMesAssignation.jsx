@@ -1,10 +1,10 @@
-import { Button, Checkbox, Chip, Grid, IconButton, Paper, Radio, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, TextField, Tooltip } from "@mui/material";
+import { Button, Checkbox, Chip, Grid, IconButton, Menu, MenuItem, Paper, Radio, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, TextField, Tooltip } from "@mui/material";
 import { getListPersonnelByNomSociete, getPersonnelByUsername } from "../../api/APIpersonnel";
 import React, { useEffect, useState } from "react";
 import { getSuivi_Ticket_Superviseur_en_cours_assignation } from "../../api/APIsuiviTicket";
 import ProtectedView from "../pages/protect/ProtectedView";
 import MainCard from 'ui-component/cards/MainCard';
-import { IconAccessible, IconArrowAutofitContent, IconBan, IconCheckbox, IconClock, IconEye, IconPlaystationX } from "@tabler/icons-react";
+import { IconAccessible, IconArrowAutofitContent, IconBan, IconCheckbox, IconClock, IconDotsVertical, IconEye, IconPlaystationX } from "@tabler/icons-react";
 import ConfirmationDialog from "./ConfirmationDialog";
 import DisplayDialog from "./DisplayDialog";
 import { format } from "date-fns";
@@ -60,6 +60,18 @@ export default function SuivreMesConfirmations() {
   const [orderBy, setOrderBy] = React.useState('nom_ville');
 
   const [filterText, setFilterText] = React.useState("");
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const openAction = Boolean(anchorEl);
+
+  const handleClickMenuDrop = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseMenuDrop = () => {
+    setAnchorEl(null);
+  };
 
   const filteredTicket = listSuiviPersonnel.filter(vil =>
     vil.ticket.numero_ticket.toLowerCase().includes(filterText.toLowerCase()) ||
@@ -293,21 +305,48 @@ export default function SuivreMesConfirmations() {
                             size='small' label={row.etat_Ticket.nom_etat_Ticket} />
                         </TableCell>
                         <TableCell align='left'>
-                          <Tooltip title="Voir">
+                         { /*<Tooltip title="Voir">
                             <IconButton aria-label="voir"
                               size="large"
                               sx={{ bgcolor: '#f0f1f5ff', color: "#486de7ff", marginRight: "2px" }}
                               onClick={() => Displaydetails(row)}>
                               <IconEye fontSize="inherit" style={{ strokeWidth: "3" }} />
                             </IconButton>
-                          </Tooltip>
-                          <Tooltip title="Confirmer">
+                          </Tooltip>*/ }
+                          {/*<Tooltip title="Confirmer">
                             <IconButton aria-label="confirmer"
                               size="large"
                               sx={{ bgcolor: '#f1e9ddff', color: "#dc4921ff" }}
                               onClick={() => Displayconfirmation(row)}>
                               <IconCheckbox fontSize="inherit" style={{ strokeWidth: "3" }} />
                             </IconButton>
+                          </Tooltip>*/}
+                          <Tooltip title="Action"  placement="right">
+                            <IconButton
+                              id="basic-button"
+                              aria-controls={openAction ? 'basic-menu' : undefined}
+                              aria-haspopup="true"
+                              aria-expanded={openAction ? 'true' : undefined}
+                              //  sx={{ marginRight: "2px", borderWidth: 2, borderStyle: 'solid'  }}
+                              onClick={handleClickMenuDrop}
+                            >
+                              <IconDotsVertical fontSize="inherit" style={{ strokeWidth: "2" }} />
+                            </IconButton>
+                            <Menu
+                              id="basic-menu"
+                              anchorEl={anchorEl}
+                              open={openAction}
+                              onClose={handleCloseMenuDrop}
+                              slotProps={{
+                                list: {
+                                  'aria-labelledby': 'basic-button',
+                                },
+                              }}
+                            >
+                              <MenuItem onClick={() => Displaydetails(row)}>Voir</MenuItem>
+                              <MenuItem onClick={() => Displayconfirmation(row)}>Confirmer</MenuItem>
+                            </Menu>
+
                           </Tooltip>
                         </TableCell>
                       </TableRow>

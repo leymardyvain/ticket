@@ -61,7 +61,7 @@ function Ticket() {
 
     const [files, setFiles] = useState([]);
 
-    const [isSubmit, setIsSubmit] = useState("false");
+    const [isSubmit, setIsSubmit] = useState(false);
 
     const fetchDataNiveauCriticite = async () => {
         try {
@@ -125,9 +125,6 @@ function Ticket() {
 
     const handlesubmit = async () => {
 
-        console.log("selectedType "+selectedType);
-        console.log("selectedNiveau "+selectedNiveau);
-
         if (formData.description === '' || Object.values(selectedType).length === 0 || Object.values(selectedNiveau).length === 0 ) {
 
             setOpen(true);
@@ -136,6 +133,8 @@ function Ticket() {
             setMessage("Un des champs est vide !");
 
         } else {
+
+            setIsSubmit(true);
 
             const afterNumTicket = { ...formData, numero_ticket: numTicket };
             const afterNiveau = { ...afterNumTicket, niveau_criticite: selectedNiveau };
@@ -160,19 +159,19 @@ function Ticket() {
                 setFiles([]);
                 setNiveau_criticite({});
                 setType_Ticket({});
-                setIsSubmit(true);
             }).catch((error) => {
                 setOpen(true);
                 setSeverity("error");
                 setColor("red");
                 setMessage("Une erreur est survenue lors de la création du ticket")
-                setIsSubmit(false);
             });
 
             if (files.length > 0) {
                 await handleFileUpload();
             }
         }
+
+        setIsSubmit(false);
     };
 
     const handleFileUpload = async () => {
@@ -318,6 +317,7 @@ function Ticket() {
                     <Button
                         onClick={handlesubmit}
                         variant="contained"
+                        disabled={isSubmit}
                         style={{ backgroundColor: "#d2cbc5ff", color: "#793198" }}>
                         Enregistrer
                     </Button>

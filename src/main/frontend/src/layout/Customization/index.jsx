@@ -34,7 +34,7 @@ export default function Customization() {
   return (
     <>
       {/* toggle button */}
-      <Tooltip title="Live Customize">
+      <Tooltip title="Personnaliser">
         <Fab
           component="div"
           onClick={handleToggle}
@@ -55,7 +55,7 @@ export default function Customization() {
           }}
         >
           <AnimateButton type="rotate">
-            <IconButton color="inherit" size="large" disableRipple aria-label="live customize">
+            <IconButton color="inherit" size="large" disableRipple aria-label="Personnaliser">
               <IconSettings />
             </IconButton>
           </AnimateButton>

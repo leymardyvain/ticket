@@ -1,5 +1,5 @@
-import { Chip, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, TextField, Tooltip } from '@mui/material'
-import { IconAccessible, IconBan, IconCircleCheck, IconClock, IconDoor, IconEye, IconPlaystationX, IconSettingsAutomation } from '@tabler/icons-react';
+import { Chip, Grid, IconButton, Menu, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, TextField, Tooltip } from '@mui/material'
+import { IconAccessible, IconBan, IconCircleCheck, IconClock, IconDoor, IconDotsVertical, IconEye, IconPlaystationX, IconSettingsAutomation } from '@tabler/icons-react';
 import React, { useState } from 'react'
 import MainCard from 'ui-component/cards/MainCard';
 import { getSuivi_Ticket } from '../../api/APIsuiviTicket';
@@ -9,8 +9,23 @@ import { format } from "date-fns";
 import DisplayUserDialog from './DisplayUserDialog';
 import ConfirmationUserDialog from './ConfirmationUserDialog';
 import AnnulationUserDialog from './AnnulationUserDialog';
+import Dropdown from './Dropdown ';
 
 function SuivreTicketUser() {
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const openAction = Boolean(anchorEl);
+
+    const handleClickMenuDrop = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleCloseMenuDrop = () => {
+        setAnchorEl(null);
+    };
+
+    const [IsResolu, setIsResolu] = React.useState(false);
 
     const [page, setPage] = React.useState(0);
 
@@ -190,6 +205,16 @@ function SuivreTicketUser() {
         }
     };
 
+    const getIsResolution = (etat) => {
+
+        switch (etat) {
+            case 'Résolu':
+                return true;
+            default:
+                return false; // Default style or no style
+        }
+    };
+
     const sortedData = stableSort(filteredTicket, getComparator(order, orderBy));
 
     return (
@@ -252,30 +277,32 @@ function SuivreTicketUser() {
                                                         size='small' label={row.etat_Ticket.nom_etat_Ticket} />
                                                 </TableCell>
                                                 <TableCell align='left'>
-                                                    <Tooltip title="Voir">
+                                                    {/* <Tooltip title="Voir">
                                                         <IconButton aria-label="voir"
                                                             size="large"
                                                             sx={{ bgcolor: '#f0f1f5ff', color: "#486de7ff", marginRight: "2px" }}
                                                             onClick={() => Displaydetails(row)}>
                                                             <IconEye fontSize="inherit" style={{ strokeWidth: "2" }} />
                                                         </IconButton>
-                                                    </Tooltip>
-                                                    {row.etat_Ticket.nom_etat_Ticket === "Résolu" && <Tooltip title="Confirmer résolution">
+                                                        
+                                                    </Tooltip>*/}
+                                                    {/*row.etat_Ticket.nom_etat_Ticket === "Résolu" && <Tooltip title="Confirmer résolution">
                                                         <IconButton aria-label="fermer"
                                                             size="large"
                                                             sx={{ bgcolor: '#f0f1f5ff', color: "#1c992eff", marginRight: "2px" }}
                                                             onClick={() => Displayconfirmation(row)}>
                                                             <IconDoor fontSize="inherit" style={{ strokeWidth: "2" }} />
                                                         </IconButton>
-                                                    </Tooltip>}
-                                                    {row.etat_Ticket.nom_etat_Ticket === "Résolu" && <Tooltip title="Problème non résolu">
+                                                    </Tooltip>*/}
+                                                    {/*row.etat_Ticket.nom_etat_Ticket === "Résolu" && <Tooltip title="Problème non résolu">
                                                         <IconButton aria-label="fermer"
                                                             size="large"
                                                             sx={{ bgcolor: '#f0f1f5ff', color: "#b12d21ff", marginRight: "2px" }}
                                                             onClick={() => DisplayAnnulation(row)}>
                                                             <IconBan fontSize="inherit" style={{ strokeWidth: "2" }} />
                                                         </IconButton>
-                                                    </Tooltip>}
+                                                    </Tooltip>*/}
+                                                    <Dropdown row={row} Displaydetails={Displaydetails} Displayconfirmation={Displayconfirmation} DisplayAnnulation={DisplayAnnulation} />
                                                 </TableCell>
                                             </TableRow>
                                         )}

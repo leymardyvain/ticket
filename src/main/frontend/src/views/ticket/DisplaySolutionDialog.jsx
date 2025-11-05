@@ -1,8 +1,6 @@
-import { Button, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, IconButton, Stack, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Tooltip, Typography } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, Stack, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Tooltip } from "@mui/material";
 import React, { useState } from "react";
-import { getCountFichier, getDownloadFileName, getFichierByIDTicket } from "../../api/APIfichier";
-import { IconCheckbox, IconCircleX, IconDownload, IconEye, IconPlaystationX } from "@tabler/icons-react";
-import { development, production } from 'api/connexion';
+import { IconEye, IconEyeOff, IconPlaystationX } from "@tabler/icons-react";
 import { format } from "date-fns";
 import { getSolutionBySuiviTicket } from "../../api/APIsolution";
 
@@ -23,10 +21,15 @@ export default function DisplaySolutionDialog({ open, setOpen, data }) {
 
     const handleClose = () => {
         setOpen(false);
+        setSelectedSolution({});
     };
 
     const Displaydetails = (row) => {
         setSelectedSolution(() => row);
+    };
+
+    const Closedetails = () => {
+        setSelectedSolution({});
     };
 
     const fetchDataSolutionTicket = async () => {
@@ -34,7 +37,6 @@ export default function DisplaySolutionDialog({ open, setOpen, data }) {
             /*  const response = await getSolutionBySuiviTicket(data?.id_suivi_Ticket);
               setListeSolution(response.data); */
             if (data?.id_suivi_Ticket) {
-                console.log('id solution ', data?.id_suivi_Ticket)
                 const response = await getSolutionBySuiviTicket(data?.id_suivi_Ticket);
                 setListeSolution(response.data);
             }
@@ -106,9 +108,10 @@ export default function DisplaySolutionDialog({ open, setOpen, data }) {
                                                     <Tooltip title="Afficher">
                                                         <IconButton aria-label="afficher"
                                                             size="large"
-                                                            sx={{ bgcolor: '#f1e9ddff', color: "#486de7ff" }}
-                                                            onClick={() => Displaydetails(row)}>
-                                                            <IconEye fontSize="inherit" style={{ strokeWidth: "3" }} />
+                                                            sx={{ bgcolor: '#d1e5f6ff', color: "#5235d3ff" }}
+                                                            onClick={() => isDataEmpty ? Displaydetails(row) : Closedetails()}>
+                                                            {isDataEmpty && <IconEye fontSize="inherit" style={{ strokeWidth: "3" }} />}
+                                                            {!isDataEmpty && <IconEyeOff fontSize="inherit" style={{ strokeWidth: "3" }} />}
                                                         </IconButton>
                                                     </Tooltip>
                                                 </TableCell>

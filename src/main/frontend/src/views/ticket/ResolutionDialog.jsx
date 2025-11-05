@@ -128,7 +128,7 @@ export default function ResolutionDialog({ open, setOpen, data, isConfirm, setIs
             >
 
                 <DialogTitle id="alert-dialog-title">
-                    {`Solution Proposée pour :  ${data?.ticket?.numero_ticket}`}
+                    {`Solution Proposée pour le ticket N° :  ${data?.ticket?.numero_ticket}`}
                 </DialogTitle>
 
                 <IconButton

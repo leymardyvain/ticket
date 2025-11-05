@@ -1,10 +1,10 @@
-import { Button, Checkbox, Chip, Grid, IconButton, Paper, Radio, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, TextField, Tooltip } from "@mui/material";
+import { Button, Checkbox, Chip, Grid, IconButton, Menu, MenuItem, Paper, Radio, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, TextField, Tooltip } from "@mui/material";
 import { getListPersonnelByNomSociete, getPersonnelByUsername } from "../../api/APIpersonnel";
 import React, { useEffect, useState } from "react";
 import { getSuivi_Ticket_Superviseur_en_cours_assignation, getSuivi_Ticket_Superviseur_en_cours_resolution, getSuivi_Ticket_Superviseur_resolu } from "../../api/APIsuiviTicket";
 import ProtectedView from "../pages/protect/ProtectedView";
 import MainCard from 'ui-component/cards/MainCard';
-import { IconAbacus, IconAccessible, IconArrowAutofitContent, IconBan, IconCircleCheck, IconClock, IconEye, IconEyeglass, IconPlaystationX, IconSettingsAutomation } from "@tabler/icons-react";
+import { IconAbacus, IconAccessible, IconArrowAutofitContent, IconBan, IconCircleCheck, IconClock, IconDotsVertical, IconEye, IconEyeglass, IconPlaystationX, IconSettingsAutomation } from "@tabler/icons-react";
 import ConfirmationDialog from "./ConfirmationDialog";
 import DisplayDialog from "./DisplayDialog";
 import { format } from "date-fns";
@@ -50,6 +50,18 @@ export default function SuivreMesResolus() {
   const [openResolution, setOpenResolution] = useState(false);
 
   const [selectedSuivi, setSelectedSuivi] = useState({});
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const openAction = Boolean(anchorEl);
+
+  const handleClickMenuDrop = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseMenuDrop = () => {
+    setAnchorEl(null);
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -295,21 +307,48 @@ export default function SuivreMesResolus() {
                             size='small' label={row.etat_Ticket.nom_etat_Ticket} />
                         </TableCell>
                         <TableCell align='left'>
-                          <Tooltip title="Voir">
+                         {/* <Tooltip title="Voir">
                             <IconButton aria-label="voir"
                               size="large"
                               sx={{ bgcolor: '#f0f1f5ff', color: "#486de7ff", marginRight: "2px" }}
                               onClick={() => Displaydetails(row)}>
                               <IconEye fontSize="inherit" style={{ strokeWidth: "2" }} />
                             </IconButton>
-                          </Tooltip>
-                          <Tooltip title="Afficher la solution">
+                          </Tooltip> */}
+                          {/*<Tooltip title="Afficher la solution">
                             <IconButton aria-label="afficher"
                               size="large"
                               sx={{ bgcolor: '#e3f5edff', color: "#10a35eff", marginRight: "2px" }}
                               onClick={() => DisplaySolution(row)}>
                               <IconEyeglass fontSize="inherit" style={{ strokeWidth: "2" }} />
                             </IconButton>
+                          </Tooltip>*/ }
+                          <Tooltip title="Action" placement="right">
+                            <IconButton
+                              id="basic-button"
+                              aria-controls={openAction ? 'basic-menu' : undefined}
+                              aria-haspopup="true"
+                              aria-expanded={openAction ? 'true' : undefined}
+                              //  sx={{ marginRight: "2px", borderWidth: 2, borderStyle: 'solid'  }}
+                              onClick={handleClickMenuDrop}
+                            >
+                              <IconDotsVertical fontSize="inherit" style={{ strokeWidth: "2" }} />
+                            </IconButton>
+                            <Menu
+                              id="basic-menu"
+                              anchorEl={anchorEl}
+                              open={openAction}
+                              onClose={handleCloseMenuDrop}
+                              slotProps={{
+                                list: {
+                                  'aria-labelledby': 'basic-button',
+                                },
+                              }}
+                            >
+                              <MenuItem onClick={() => Displaydetails(row)}>Voir</MenuItem>
+                              <MenuItem onClick={() => DisplaySolution(row)}>Afficher solution</MenuItem>
+                            </Menu>
+
                           </Tooltip>
                         </TableCell>
                       </TableRow>

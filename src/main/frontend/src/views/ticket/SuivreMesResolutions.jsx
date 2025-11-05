@@ -1,10 +1,10 @@
-import { Alert, Button, Checkbox, Chip, Grid, IconButton, Paper, Radio, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, TextField, Tooltip } from "@mui/material";
+import { Alert, Button, Checkbox, Chip, Grid, IconButton, Menu, MenuItem, Paper, Radio, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, TextField, Tooltip } from "@mui/material";
 import { getListPersonnelByNomSociete, getPersonnelByUsername } from "../../api/APIpersonnel";
 import React, { useEffect, useState } from "react";
 import { getSuivi_Ticket_Superviseur_en_cours_assignation, getSuivi_Ticket_Superviseur_en_cours_resolution } from "../../api/APIsuiviTicket";
 import ProtectedView from "../pages/protect/ProtectedView";
 import MainCard from 'ui-component/cards/MainCard';
-import { IconAbacus, IconAccessible, IconArrowAutofitContent, IconBan, IconClock, IconEye, IconPlaystationX, IconSettingsAutomation, IconTransitionRight } from "@tabler/icons-react";
+import { IconAbacus, IconAccessible, IconArrowAutofitContent, IconBan, IconClock, IconDotsVertical, IconEye, IconPlaystationX, IconSettingsAutomation, IconTransitionRight } from "@tabler/icons-react";
 import ConfirmationDialog from "./ConfirmationDialog";
 import DisplayDialog from "./DisplayDialog";
 import { format } from "date-fns";
@@ -24,6 +24,19 @@ export default function SuivreMesResolutions() {
   const [openTransfert, setOpenTransfert] = useState(false);
 
   const [isTransfert, setIsTransfert] = useState(false);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const openAction = Boolean(anchorEl);
+
+  const handleClickMenuDrop = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseMenuDrop = () => {
+    setAnchorEl(null);
+  };
+
 
   const handleCloseDialogTransfert = () => {
     setOpenTransfert(false);
@@ -315,32 +328,58 @@ export default function SuivreMesResolutions() {
                             size="small" label={row.etat_Ticket.nom_etat_Ticket} />
                         </TableCell>
                         <TableCell align="left">
-                          <Tooltip title="Voir">
+                          {/*<Tooltip title="Voir">
                             <IconButton aria-label="voir"
                               size="small"
                               sx={{ bgcolor: "#f0f1f5ff", color: "#486de7ff", marginRight: "2px" }}
                               onClick={() => Displaydetails(row)}>
                               <IconEye fontSize="inherit" style={{ strokeWidth: "2" }} />
                             </IconButton>
-                          </Tooltip>
-                          <Tooltip title="Solution proposée">
+                          </Tooltip>*/}
+                          {/*<Tooltip title="Solution proposée">
                             <IconButton aria-label="Solution proposée"
                               size="small"
                               sx={{ bgcolor: '#d7efd8ff', color: "#35b639ff" }}
                               onClick={() => Displayresolution(row)}>
                               <IconAbacus fontSize="inherit" style={{ strokeWidth: "2" }} />
                             </IconButton>
+                          </Tooltip>*/}
+                         {/* <Tooltip title="Tranferer">
+                            <IconButton aria-label="Solution proposée"
+                              size="small"
+                              sx={{ bgcolor: '#d7efd8ff', color: "#9b1fbdff" }}
+                              onClick={() => Displaytransfert(row)}>
+                              <IconTransitionRight fontSize="inherit" style={{ strokeWidth: "2" }} />
+                            </IconButton>
+                          </Tooltip> */}
+                          <Tooltip title="Action" placement="right">
+                            <IconButton
+                              id="basic-button"
+                              aria-controls={openAction ? 'basic-menu' : undefined}
+                              aria-haspopup="true"
+                              aria-expanded={openAction ? 'true' : undefined}
+                              //  sx={{ marginRight: "2px", borderWidth: 2, borderStyle: 'solid'  }}
+                              onClick={handleClickMenuDrop}
+                            >
+                              <IconDotsVertical fontSize="inherit" style={{ strokeWidth: "2" }} />
+                            </IconButton>
+                            <Menu
+                              id="basic-menu"
+                              anchorEl={anchorEl}
+                              open={openAction}
+                              onClose={handleCloseMenuDrop}
+                              slotProps={{
+                                list: {
+                                  'aria-labelledby': 'basic-button',
+                                },
+                              }}
+                            >
+                              <MenuItem onClick={() => Displaydetails(row)}>Voir</MenuItem>
+                              <MenuItem onClick={() => Displayresolution(row)}>Solution proposée</MenuItem>
+                              <MenuItem onClick={() => Displaytransfert(row)}>Transferer</MenuItem>
+                            </Menu>
+
                           </Tooltip>
-                          <TableCell align="left">
-                            <Tooltip title="Tranferer">
-                              <IconButton aria-label="Solution proposée"
-                                size="small"
-                                sx={{ bgcolor: '#d7efd8ff', color: "#9b1fbdff" }}
-                                onClick={() => Displaytransfert(row)}>
-                                <IconTransitionRight fontSize="inherit" style={{ strokeWidth: "2" }} />
-                              </IconButton>
-                            </Tooltip>
-                          </TableCell>
                         </TableCell>
                       </TableRow>
                     )}

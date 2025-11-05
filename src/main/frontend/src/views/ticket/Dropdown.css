@@ -1,0 +1,28 @@
+/* Dropdown.css */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 50px;
+}
+
+.dropdown-menu {
+  position: fixed;
+  background-color: #ffffff;
+  min-width: 160px;
+  box-shadow: 8px 8px 16px 8px rgba(0.2,0.2,0.2,0.2);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.dropdown-item {
+  margin-top: 4px;
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+  font-size: small;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
