@@ -68,7 +68,7 @@ export default function ProfileSection() {
   const handleLogout = () => {
     localStorage.removeItem("[[@^]7893T##5267");
     localStorage.removeItem("{{@^]1234R**PMLK");
-    window.location.href = "/pages/login";
+    window.location.href = "/";
   };
 
   const handleUpdatePassword = () => {
