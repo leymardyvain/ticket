@@ -11,6 +11,8 @@ import { format } from "date-fns";
 import DisplayDialog from './DisplayDialog';
 import DisplayHistoriqueDialog from './DisplayHistoriqueDialog';
 import DisplaySolutionDialog from './DisplaySolutionDialog';
+import Dropdown from './Dropdown ';
+import DropdownSearch from './DropdownSearch';
 
 const ListSuiviRapport = ({ suivi })  => {
 
@@ -257,30 +259,32 @@ const ListSuiviRapport = ({ suivi })  => {
                                                         size='small' label={row.etat_Ticket.nom_etat_Ticket} />
                                                 </TableCell>
                                                 <TableCell align='left'>
-                                                    <Tooltip title="Voir">
+                                                     <DropdownSearch  row={row} Displaydetails={Displaydetails} Displayhistorique={Displayhistorique} DisplaySolution={DisplaySolution} />
+                                                 { /*  <Tooltip title="Voir">
                                                         <IconButton aria-label="voir"
                                                             size="small"
                                                             sx={{ bgcolor: '#f0f1f5ff', color: "#486de7ff", marginRight: "2px" }}
                                                             onClick={() => Displaydetails(row)}>
                                                             <IconEye fontSize="inherit" style={{ strokeWidth: "2" }} />
                                                         </IconButton>
-                                                    </Tooltip>
-                                                    <Tooltip title="Afficher historique">
+                                                    </Tooltip> */}
+
+                                                    { /*<Tooltip title="Afficher historique">
                                                         <IconButton aria-label="historique"
                                                             size="small"
                                                             sx={{ bgcolor: '#f4e8f8ff', color: "#a310ccff", marginRight: "2px" }}
                                                             onClick={() => Displayhistorique(row)}>
                                                             <IconArrowsMinimize fontSize="inherit" style={{ strokeWidth: "2" }} />
                                                         </IconButton>
-                                                    </Tooltip>
-                                                    {(row.etat_Ticket.nom_etat_Ticket === "Résolu" || row.etat_Ticket.nom_etat_Ticket === "Fermé") && <Tooltip title="Afficher la solution">
+                                                    </Tooltip> */}
+                                                    {/*(row.etat_Ticket.nom_etat_Ticket === "Résolu" || row.etat_Ticket.nom_etat_Ticket === "Fermé") && <Tooltip title="Afficher la solution">
                                                         <IconButton aria-label="afficher"
                                                             size="large"
                                                             sx={{ bgcolor: '#e3f5edff', color: "#10a35eff", marginRight: "2px" }}
                                                             onClick={() => DisplaySolution(row)}>
                                                             <IconEyeglass fontSize="inherit" style={{ strokeWidth: "2" }} />
                                                         </IconButton>
-                                                    </Tooltip>}
+                                                    </Tooltip>*/}
                                                 </TableCell>
                                             </TableRow>
                                         )}
