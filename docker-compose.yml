@@ -23,7 +23,7 @@ services:
     image: yleymard/frontend:latest
     restart: on-failure
     ports:
-      - "3001"
+      - "4000"
     depends_on:
       - backend
     networks:
