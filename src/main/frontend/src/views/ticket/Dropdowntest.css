@@ -1,17 +1,10 @@
-/* Dropdown.css */
-.dropdown {
-  position: relative;
-  display: inline-block;
- /* margin-right: 50px;*/
-}
-
 .dropdown-menu {
   position: relative;
   background-color: #ffffff;
   min-width: 155px;
-  box-shadow: 8px 8px 16px 8px rgba(250, 248, 248, 0.2);
+  box-shadow: 8px 8px 16px 8px rgba(0.2,0.2,0.2,0.2);
   z-index: 1;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .dropdown-item {

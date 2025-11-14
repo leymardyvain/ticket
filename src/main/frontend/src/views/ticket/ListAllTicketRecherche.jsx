@@ -212,13 +212,12 @@ const ListSuiviRapport = ({ suivi })  => {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell align="left">ID</TableCell>
-                                        <TableCell align="left">Numero</TableCell>
                                         <TableCell align="left">
                                             <TableSortLabel
-                                                active={orderBy === 'description'}
-                                                direction={orderBy === 'description' ? order : 'desc'}
-                                                onClick={() => handleSort('description')} >
-                                                Description
+                                                active={orderBy === 'numero_ticket'}
+                                                direction={orderBy === 'numero_ticket' ? order : 'desc'}
+                                                onClick={() => handleSort('numero_ticket')} >
+                                                Numero
                                             </TableSortLabel></TableCell>
                                         <TableCell align="left">Date ticket</TableCell>
                                         <TableCell align="left">Emetteur</TableCell>
@@ -241,7 +240,6 @@ const ListSuiviRapport = ({ suivi })  => {
                                             >
                                                 <TableCell align="left">{row.id_suivi_Ticket}</TableCell>
                                                 <TableCell align="left">{row.ticket.numero_ticket}</TableCell>
-                                                <TableCell align="left">{row.ticket.description}</TableCell>
                                                 <TableCell align="left">{format(row.ticket.date_creation_ticket, "dd-MM-yyyy HH:mm")}</TableCell>
                                                 <TableCell align="left">{row.ticket.personnel.nom_personnel}</TableCell>
                                                 <TableCell align="left">{row.personnel_en_charge !== undefined || row.personnel_en_charge !== null ? row.personnel_en_charge?.nom_personnel : "N/A"}</TableCell>
