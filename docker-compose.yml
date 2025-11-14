@@ -1,180 +1,95 @@
 version: "3.8"
 
 services:
-  
-  mysql:
-    
-    image: mysql:8.0
-    
-    container_name: dbserver
-    
-    restart: unless-stopped
-        
-    environment:
-      
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: infoDB
-      MYSQL_ROOT_HOST: "%"
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-
-    ports:
-      - "3308:3306"
-
-    volumes:
-      - dbapp1:/var/lib/mysql
-      
-    networks:
-     - springticketnetwork
-      
-  webserver01:
-
+       
+  backend:
     build: ./
-
-    image: yleymard/spring_ticket:latest
-
-    container_name: webserver01
-    
+    image: yleymard/backend:latest
+    container_name: backend
     restart: on-failure
-    
     ports:
-      - "8788"
-      
-    environment:
-      SPRING_PROFILES_ACTIVE: prod
-        
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-    
-    networks:
-     - springticketnetwork
-    
-  webserver02:
-    
-    depends_on:
-      - webserver01
-      
-    image: yleymard/spring_ticket:latest
-
-    container_name: webserver02
-         
-    restart: on-failure
-    
-    ports:
-      - "8788"
-      
-    environment:
-      SPRING_PROFILES_ACTIVE: prod
-        
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-    
-    networks:
-     - springticketnetwork
-
-  webserver03:
-    
-    depends_on:
-      - webserver02
-      
-    image: yleymard/spring_ticket:latest
-
-    container_name: webserver03
-         
-    restart: on-failure
-        
-    ports:
-      - "8788"
-      
-    environment:
-      SPRING_PROFILES_ACTIVE: prod
-        
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-    
-    networks:
-     - springticketnetwork
-
-  webserver04:
-    
-    depends_on:
-      - webserver03
-      
-    image: yleymard/spring_ticket:latest
-
-    container_name: webserver04
-         
-    restart: on-failure
-    
-    ports:
-      - "8788"
-      
-    environment:
-      SPRING_PROFILES_ACTIVE: prod
-        
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-    
-    networks:
-     - springticketnetwork
-
-  webserver05:
-    
-    depends_on:
-      - webserver04
-      
-    image: yleymard/spring_ticket:latest
-
-    container_name: webserver05
-         
-    restart: on-failure
-    
-    ports:
-      - "8788"
-      
-    environment:
-      SPRING_PROFILES_ACTIVE: prod
-        
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-    
-    networks:
-     - springticketnetwork
-
-  hapee-3.1:
-   
-   build:
-    
-    context: .
-    
-    dockerfile: ./haproxy.Dockerfile
-
-   container_name: haproxy
-   
-   depends_on:
-      - webserver05
-      
-   ports:
       - "8788:8788"
-      - "9092:9092"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
+    networks:
+      - pipelineticket_springticketnetwork
+    
+  frontend:
+    build: ./src/main/frontend
+    image: yleymard/frontend:latest
+    restart: on-failure
+    ports:
+      - "3001"
+    depends_on:
+      - backend
+    networks:
+      - pipelineticket_springticketnetwork
 
-   restart: always
-      
-   networks:
-    - springticketnetwork
-      
-volumes:
-  dbapp1:
+  prometheus:
+    image: prom/prometheus:latest
+    restart: on-failure
+    volumes:
+      - ./prometheus:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+    networks:
+      - pipelineticket_springticketnetwork
+
+  loki:
+    image: grafana/loki:latest
+    restart: on-failure
+    volumes:
+      - ./loki:/mnt/config
+    command:
+      - '-config.file=/mnt/config/loki-local-config.yaml'
+    ports:
+      - "3100:3100"
+    networks:
+      - pipelineticket_springticketnetwork
+
+  promtail:
+    image: grafana/promtail:latest
+    restart: on-failure
+    volumes:
+      - ./promtail:/etc/promtail
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro # Mount Docker logs
+    command:
+      - '-config.file=/etc/promtail/promtail-config.yaml'
+    networks:
+      - pipelineticket_springticketnetwork
+
+  init_grafana:
+    image: grafana/grafana:latest
+    user: root
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        chown -R 65534:65534 /var/lib/grafana
+    volumes:
+      - ./data_grafana:/var/lib/grafana
   
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    user: "65534"
+    volumes:
+      - ./data_grafana:/var/lib/grafana
+    depends_on:
+      - prometheus
+      - loki
+    networks:
+      - pipelineticket_springticketnetwork
+
 networks:
- springticketnetwork:
-  driver: bridge
+ pipelineticket_springticketnetwork:
+   driver: bridge

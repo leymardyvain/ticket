@@ -13,11 +13,18 @@ pipeline {
 					url: 'https://github.com/leymardyvain/ticket.git'
         		}
     		}
-		stage('Stop app container') {
+		stage('Stop backend container') {
 			steps {
 				echo 'starting stop app container ...'
-				sh 'docker ps -f name=webserver -q | xargs --no-run-if-empty docker container stop'
-				sh 'docker container ls -a -f name=webserver -q | xargs -r docker container rm'
+				sh 'docker ps -f name=backend -q | xargs --no-run-if-empty docker container stop'
+				sh 'docker container ls -a -f name=backend -q | xargs -r docker container rm'
+        		}
+      		}
+      	stage('Stop frontend container') {
+			steps {
+				echo 'starting stop app container ...'
+				sh 'docker ps -f name=frontend -q | xargs --no-run-if-empty docker container stop'
+				sh 'docker container ls -a -f name=frontend -q | xargs -r docker container rm'
         		}
       		}
 		stage('Stop db container') {
@@ -25,14 +32,6 @@ pipeline {
 				echo 'starting stop db container ...'
 				sh 'docker ps -f name=dbserver -q | xargs --no-run-if-empty docker container stop'
 				sh 'docker container ls -a -f name=dbserver -q | xargs -r docker container rm'
-				sh 'docker system prune -a -f'	
-        		}
-      		}
-      	stage('Stop haproxy loadbalancer container') {
-			steps {
-				echo 'starting stop haproxy container ...'
-				sh 'docker ps -f name=haproxy -q | xargs --no-run-if-empty docker container stop'
-				sh 'docker container ls -a -f name=haproxy -q | xargs -r docker container rm'
 				sh 'docker system prune -a -f'	
         		}
       		}
@@ -50,7 +49,8 @@ pipeline {
       		steps {
         		withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           		sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          		sh 'docker push yleymard/spring_ticket:latest'
+          		sh 'docker push yleymard/backend:latest'
+          		sh 'docker push yleymard/frontend:latest'
           		echo "image yleymard/spring_ticket pushed"
         	}
           }
