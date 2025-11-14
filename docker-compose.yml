@@ -33,7 +33,7 @@ services:
     image: prom/prometheus:latest
     restart: on-failure
     volumes:
-      - ./prometheus:/etc/prometheus
+      - data_prometheus:/etc/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
@@ -45,7 +45,7 @@ services:
     image: grafana/loki:latest
     restart: on-failure
     volumes:
-      - ./loki:/mnt/config
+      - data_loki:/mnt/config
     command:
       - '-config.file=/mnt/config/loki-local-config.yaml'
     ports:
@@ -57,7 +57,7 @@ services:
     image: grafana/promtail:latest
     restart: on-failure
     volumes:
-      - ./promtail:/etc/promtail
+      - data_promtail:/etc/promtail
       - /var/lib/docker/containers:/var/lib/docker/containers:ro # Mount Docker logs
     command:
       - '-config.file=/etc/promtail/promtail-config.yaml'
@@ -83,12 +83,18 @@ services:
       - "3000:3000"
     user: "65534"
     volumes:
-      - ./data_grafana:/var/lib/grafana
+      - data_grafana:/var/lib/grafana
     depends_on:
       - prometheus
       - loki
     networks:
       - pipelineticket_springticketnetwork
+
+volumes:
+  data_grafana:
+  data_loki:
+  data_prometheus:
+  data_promtail:
 
 networks:
   pipelineticket_springticketnetwork:
