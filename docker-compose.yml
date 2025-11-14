@@ -91,5 +91,4 @@ services:
       - pipelineticket_springticketnetwork
 
 networks:
- pipelineticket_springticketnetwork:
-   driver: bridge
+  pipelineticket_springticketnetwork:
