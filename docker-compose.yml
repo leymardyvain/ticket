@@ -1,6 +1,20 @@
 version: "3.8"
 
 services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: dbserver
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: infoDB
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3308:3306" 
+    volumes:
+      - dbappInfo:/var/lib/mysql
        
   backend:
     build: ./
@@ -95,6 +109,7 @@ volumes:
   data_loki:
   data_prometheus:
   data_promtail:
+  dbappInfo:
 
 networks:
   pipelineticket_springticketnetwork:
