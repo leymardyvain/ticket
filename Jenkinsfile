@@ -27,6 +27,34 @@ pipeline {
 				sh 'docker container ls -a -f name=frontend -q | xargs -r docker container rm'
         		}
       		}
+      	stage('Stop grafana container') {
+			steps {
+				echo 'starting stop app container ...'
+				sh 'docker ps -f name=grafana -q | xargs --no-run-if-empty docker container stop'
+				sh 'docker container ls -a -f name=grafana -q | xargs -r docker container rm'
+        		}
+      		}
+      	stage('Stop loki container') {
+			steps {
+				echo 'starting stop app container ...'
+				sh 'docker ps -f name=loki -q | xargs --no-run-if-empty docker container stop'
+				sh 'docker container ls -a -f name=loki -q | xargs -r docker container rm'
+        		}
+      		}
+       stage('Stop prometheus container') {
+			steps {
+				echo 'starting stop app container ...'
+				sh 'docker ps -f name=prometheus -q | xargs --no-run-if-empty docker container stop'
+				sh 'docker container ls -a -f name=prometheus -q | xargs -r docker container rm'
+        		}
+      		}
+        stage('Stop promtail container') {
+			steps {
+				echo 'starting stop app container ...'
+				sh 'docker ps -f name=promtail -q | xargs --no-run-if-empty docker container stop'
+				sh 'docker container ls -a -f name=promtail -q | xargs -r docker container rm'
+        		}
+      		}
 		stage('Stop db container') {
 			steps {
 				echo 'starting stop db container ...'
