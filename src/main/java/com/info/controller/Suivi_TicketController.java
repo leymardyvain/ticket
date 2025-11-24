@@ -155,7 +155,7 @@ public class Suivi_TicketController {
 
 		int year = cal.get(Calendar.YEAR);
 
-		SimpleDateFormat formattermoisannee = new SimpleDateFormat("MMMM " + year);
+		SimpleDateFormat formattermoisannee = new SimpleDateFormat("MMMM "+year);
 
 		List<Suivi_Ticket> List_suivi_Tickets = suivi_TicketService.getAllSuivi_Tickets();
 
@@ -171,7 +171,7 @@ public class Suivi_TicketController {
 
 			for (String moisan : ListMoisannee) {
 
-				String newDaterecup = moisan + " " + year;
+				String newDaterecup = moisan+" "+year;
 
 				int nombre_etat = 0;
 
