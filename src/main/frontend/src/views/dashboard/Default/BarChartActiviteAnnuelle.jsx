@@ -71,6 +71,7 @@ export default function BarChartActiviteAnnuelle({ isLoading, listSeries }) {
       }
     }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    console.log('listSeries ',listSeries);
   }, [theme.palette]);
 
   return (
