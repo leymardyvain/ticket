@@ -197,7 +197,9 @@ public class Suivi_TicketController {
 
 			liste_Series.add(new_series);
 		}
-
+		
+		System.out.println("dans backend "+liste_Series.size());
+		
 		return ResponseEntity.ok(liste_Series);
 	}
 

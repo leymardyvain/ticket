@@ -82,6 +82,7 @@ export default function Dashboard() {
   const fetchDataAllChart = async () => {
     try {
       const response = await getChartAdmin();
+      console.log('fetch response',response.data );
       setListSeries(response.data);
     } catch (error) {
       console.error('Error fetching chart:', error);
