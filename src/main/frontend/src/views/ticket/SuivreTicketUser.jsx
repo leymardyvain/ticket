@@ -277,7 +277,7 @@ function SuivreTicketUser() {
                                                         size='small' label={row.etat_Ticket.nom_etat_Ticket} />
                                                 </TableCell>
                                                 <TableCell align='left'>
-                                                    {/* <Tooltip title="Voir">
+                                                     <Tooltip title="Voir">
                                                         <IconButton aria-label="voir"
                                                             size="large"
                                                             sx={{ bgcolor: '#f0f1f5ff', color: "#486de7ff", marginRight: "2px" }}
@@ -285,24 +285,24 @@ function SuivreTicketUser() {
                                                             <IconEye fontSize="inherit" style={{ strokeWidth: "2" }} />
                                                         </IconButton>
                                                         
-                                                    </Tooltip>*/}
-                                                    {/*row.etat_Ticket.nom_etat_Ticket === "Résolu" && <Tooltip title="Confirmer résolution">
+                                                    </Tooltip>
+                                                    {row.etat_Ticket.nom_etat_Ticket === "Résolu" && <Tooltip title="Confirmer résolution">
                                                         <IconButton aria-label="fermer"
                                                             size="large"
                                                             sx={{ bgcolor: '#f0f1f5ff', color: "#1c992eff", marginRight: "2px" }}
                                                             onClick={() => Displayconfirmation(row)}>
                                                             <IconDoor fontSize="inherit" style={{ strokeWidth: "2" }} />
                                                         </IconButton>
-                                                    </Tooltip>*/}
-                                                    {/*row.etat_Ticket.nom_etat_Ticket === "Résolu" && <Tooltip title="Problème non résolu">
+                                                    </Tooltip>}
+                                                    {row.etat_Ticket.nom_etat_Ticket === "Résolu" && <Tooltip title="Problème non résolu">
                                                         <IconButton aria-label="fermer"
                                                             size="large"
                                                             sx={{ bgcolor: '#f0f1f5ff', color: "#b12d21ff", marginRight: "2px" }}
                                                             onClick={() => DisplayAnnulation(row)}>
                                                             <IconBan fontSize="inherit" style={{ strokeWidth: "2" }} />
                                                         </IconButton>
-                                                    </Tooltip>*/}
-                                                    <Dropdown row={row} Displaydetails={Displaydetails} Displayconfirmation={Displayconfirmation} DisplayAnnulation={DisplayAnnulation} />
+                                                    </Tooltip>}
+                                                    { /*<Dropdown row={row} Displaydetails={Displaydetails} Displayconfirmation={Displayconfirmation} DisplayAnnulation={DisplayAnnulation} /> */}
                                                 </TableCell>
                                             </TableRow>
                                         )}

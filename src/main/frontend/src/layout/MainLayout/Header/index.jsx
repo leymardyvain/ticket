@@ -31,7 +31,7 @@ export default function Header() {
       <Box sx={{ width: downMD ? 'auto' : 228, display: 'flex' }}>
         <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
           <LogoSection /><span style={{ color: '#7e57c2', fontSize: '16px', fontWeight: 'bold' }}>
-            Gesincidents
+            Gescidents
           </span>
         </Box>
         <Avatar
