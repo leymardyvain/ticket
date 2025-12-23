@@ -152,15 +152,17 @@ export default function NotificationSection() {
             '&[aria-controls="menu-list-grow"],&:hover': {
               bgcolor: 'secondary.dark',
               color: 'secondary.light'
-            }
+            },
+            width: 66, 
+            height: 46
           }}
           ref={anchorRef}
           aria-controls={open ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
           color="inherit"
-        > <Badge badgeContent={listNotification.length} color="error">
-            <IconBell stroke={1.5} size="20px" />
+        > <Badge badgeContent={listNotification.length} color="error" max={10} >
+            <IconBell stroke={1.5} size="28px" />
           </Badge>
         </Avatar>
       </Box>
