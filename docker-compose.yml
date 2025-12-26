@@ -27,13 +27,28 @@ services:
       - "8788:8788"
     environment:
       SPRING_PROFILES_ACTIVE: prod
+      # Use the service name 'redis' as the hostname for the backend to connect
+      SPRING_REDIS_HOST: redis 
+      SPRING_REDIS_PORT: 6379
     volumes:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
+    depends_on:
+      - redis
     networks:
       - pipelineticket_springticketnetwork
     
+  redis:
+    image: redis:7.2.4-alpine
+    container_name: redis_server
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data # Persist Redis data
+    networks:
+      - pipelineticket_springticketnetwork
+
   frontend:
     build: ./src/main/frontend
     image: yleymard/frontend:latest
@@ -112,6 +127,7 @@ volumes:
   data_prometheus:
   data_promtail:
   dbappInfo:
+  redis_data:
 
 networks:
   pipelineticket_springticketnetwork:

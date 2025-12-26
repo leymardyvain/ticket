@@ -33,6 +33,7 @@ import User1 from 'assets/images/users/user-round.svg';
 import { IconBrandSamsungpass, IconLogout, IconPassword, IconSearch, IconSettings, IconUser } from '@tabler/icons-react';
 import ProtectedView from '../../../../views/pages/protect/ProtectedView';
 import UpdatePasswordUserDialog from '../../../../views/personnel/UpdatePasswordUserDialog';
+import GetUserRoles from '../../../../views/pages/protect/GetUserRoles';
 
 // ==============================|| PROFILE MENU ||============================== //
 
@@ -52,6 +53,8 @@ export default function ProfileSection() {
   const anchorRef = useRef(null);
 
   const username = ProtectedView();
+
+  const roles = GetUserRoles();
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -75,7 +78,7 @@ export default function ProfileSection() {
     setOpenUpdate(true);
   };
 
-  const handleCloseUpdatePassword =() => {
+  const handleCloseUpdatePassword = () => {
     setOpenUpdate(false);
   };
 
@@ -87,6 +90,48 @@ export default function ProfileSection() {
 
     prevOpen.current = open;
   }, [open]);
+
+  const getDynamicRoleUser = (role) => {
+
+    switch (role) {
+      case 'ROLE_USER':
+        return "Utilisateur";
+      case 'ROLE_ADMIN':
+        return "Administrateur";
+      case 'ROLE_SUPERVISEUR':
+        return "Superviseur";
+      default:
+        return {}; // Default style or no style
+    }
+  };
+
+  const getDynamicColorRole = (role) => {
+
+    switch (role) {
+      case 'ROLE_USER':
+        return "#2087e6ff";
+      case 'ROLE_ADMIN':
+        return "#cc2900";
+      case 'ROLE_SUPERVISEUR':
+        return "#d60caaff";
+      default:
+        return {}; // Default style or no style
+    }
+  };
+
+  const getDynamicBgColorRole = (role) => {
+
+    switch (role) {
+      case 'ROLE_USER':
+        return "#e6eaedff";
+      case 'ROLE_ADMIN':
+        return "#efe6e4ff";
+      case 'ROLE_SUPERVISEUR':
+        return "#f8f2f7ff";
+      default:
+        return {}; // Default style or no style
+    }
+  };
 
   return (
     <>
@@ -147,11 +192,19 @@ export default function ProfileSection() {
                   <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>
                     <Box sx={{ p: 2, pb: 0 }}>
                       <Stack>
-                        <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center' }}>
+                        <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center' }} margin={1}>
                           <Typography variant="h4">Good Morning,</Typography>
                           <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
                             {username}
                           </Typography>
+                        </Stack>
+                        <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center' }}>
+                          {roles.map((role, index) => (
+
+                            <Chip sx={{ color: `${getDynamicColorRole(role)}`, margin: 0.2, fontWeight: 'bold', bgcolor: `${getDynamicBgColorRole(role)}` }} key={index}
+                              size='small' label={getDynamicRoleUser(role)} />
+
+                          ))}
                         </Stack>
                         {/*<Typography variant="subtitle2">Project Admin</Typography>*/}
                       </Stack>
@@ -169,7 +222,7 @@ export default function ProfileSection() {
                         aria-describedby="search-helper-text"
                         slotProps={{ input: { 'aria-label': 'weight' } }}
                       /> */}
-                      <Divider />
+                      <Divider sx={{ margin: 1 }} />
                     </Box>
                     <Box
                       sx={{
@@ -282,7 +335,7 @@ export default function ProfileSection() {
           </ClickAwayListener>
         )}
       </Popper>
-       <UpdatePasswordUserDialog open={openUpdate} handleClose={handleCloseUpdatePassword} />
+      <UpdatePasswordUserDialog open={openUpdate} handleClose={handleCloseUpdatePassword} />
     </>
   );
 }

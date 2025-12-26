@@ -328,7 +328,7 @@ function Ticket() {
                         onClose={handleCloseSnackbar}
                         severity={severity}
                         variant="filled"
-                        sx={{ width: '100%', color: `${color}`, bgcolor: "#F9FBE7" }}
+                        sx={{ width: '100%', color: `${color}`, bgcolor: "#FFFFFF" }}
                     >
                         {message}
                     </Alert>
