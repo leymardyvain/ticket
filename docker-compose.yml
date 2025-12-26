@@ -65,6 +65,7 @@ services:
     restart: on-failure
     volumes:
       - data_prometheus:/etc/prometheus
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml 
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
