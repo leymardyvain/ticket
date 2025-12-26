@@ -78,7 +78,7 @@ services:
     volumes:
       - data_loki:/mnt/config
     command:
-      - '-config.file=/mnt/config/loki-local-config.yaml'
+      - '--config.file=/mnt/config/loki-local-config.yaml'
     ports:
       - "3100:3100"
     networks:
