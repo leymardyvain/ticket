@@ -77,8 +77,9 @@ services:
     restart: on-failure
     volumes:
       - data_loki:/mnt/config
+      - ./loki/loki-local-config.yaml:/mnt/config/loki-local-config.yaml 
     command:
-      - '--config.file=/mnt/config/loki-local-config.yaml'
+      - '-config.file=/mnt/config/loki-local-config.yaml'
     ports:
       - "3100:3100"
     networks:
@@ -90,6 +91,7 @@ services:
     volumes:
       - data_promtail:/etc/promtail
       - /var/lib/docker/containers:/var/lib/docker/containers:ro # Mount Docker logs
+      - ./promtail/promtail-config.yaml:/etc/promtail/promtail-config.yaml
     command:
       - '-config.file=/etc/promtail/promtail-config.yaml'
     networks:
