@@ -65,7 +65,7 @@ pipeline {
       		}*/
       		stage('Remove all stopped container') {
 			steps {
-				sh 'docker system prune  -f'	
+				sh 'docker system prune -a -f'	
         		}
       		}
 		 stage('Create mvn clean install') {
