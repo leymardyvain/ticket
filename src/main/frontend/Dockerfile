@@ -15,7 +15,7 @@ RUN npm install
 COPY . .
 
 # Expose the port your Node.js application listens on (e.g., 3000)
-EXPOSE 3001
+EXPOSE 4000
 
 # Define the command to run your application when the container starts
 CMD ["npm", "start"]
