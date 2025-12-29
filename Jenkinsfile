@@ -75,7 +75,7 @@ pipeline {
       		}
 		stage('Build Images') {
 			steps {
-					sh 'docker-compose up --build -d'
+					sh 'docker-compose up --build -d --force-recreate'
         		}
       		}
       	stage('Docker Push') {
