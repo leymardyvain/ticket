@@ -55,14 +55,13 @@ pipeline {
 				sh 'docker container ls -a -f name=promtail -q | xargs -r docker container rm'
         		}
       		}
-		/*stage('Stop db container') {
+		stage('Stop db container') {
 			steps {
 				echo 'starting stop db container ...'
 				sh 'docker ps -f name=dbserver -q | xargs --no-run-if-empty docker container stop'
 				sh 'docker container ls -a -f name=dbserver -q | xargs -r docker container rm'
-				sh 'docker system prune  -f'	
         		}
-      		}*/
+      		}
       		stage('Remove all stopped container') {
 			steps {
 				sh 'docker system prune -a -f'	
