@@ -62,6 +62,13 @@ pipeline {
 				sh 'docker container ls -a -f name=dbserver -q | xargs -r docker container rm'
         		}
       		}
+		stage('Stop redis container') {
+			steps {
+				echo 'starting stop db container ...'
+				sh 'docker ps -f name=redis -q | xargs --no-run-if-empty docker container stop'
+				sh 'docker container ls -a -f name=redis -q | xargs -r docker container rm'
+        		}
+      		}
       		stage('Remove all stopped container') {
 			steps {
 				sh 'docker system prune -a -f'	
