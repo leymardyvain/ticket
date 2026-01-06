@@ -179,12 +179,21 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: mysql-pv
-  namespace: spring-react
 spec:
-  accessModes:
-    - ReadWriteOnce
   capacity:
     storage: 1Gi
-  storageClassName: standard
-  hostPath:
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: local-storage
+  local:
     path: D:\k8s_mysql
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - docker-desktop
+
