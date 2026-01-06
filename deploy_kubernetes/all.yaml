@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: spring-mantis
+  name: spring-react
   
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
-  namespace: spring-mantis
+  namespace: spring-react
 spec:
   replicas: 1
   selector:
@@ -27,7 +27,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               value: root
             - name: MYSQL_DATABASE
-              value: rapportDB
+              value: infoDB
             - name: MYSQL_ROOT_HOST
               value: "%"
           ports:
@@ -45,7 +45,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mysql
-  namespace: spring-mantis
+  namespace: spring-react
   labels:
     app: mysql
 spec:
@@ -61,49 +61,89 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: springboot-app
-  namespace: spring-mantis
+  name: backend
+  namespace: spring-react
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
-      app: springboot-app
+      app: backend
   template:
     metadata:
       labels:
-        app: springboot-app
+        app: backend
     spec:
       containers:
-        - name: springboot-app
-          image: yleymard/spring_mantis:latest
+        - name: backend
+          image: yleymard/backend:latest
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8787
+            - containerPort: 8788
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: springboot-app
-  namespace: spring-mantis
+  name: backend
+  namespace: spring-react
 spec:
   selector:
-    app: springboot-app
+    app: backend
   ports:
-    - name: springboot-app
+    - name: backend
       protocol: TCP
-      port: 8787
-      targetPort: 8787
+      port: 8788
+      targetPort: 8788
   type: LoadBalancer
   externalIPs: 
-    - 192.168.47.137
-  
+    - 192.168.106.10
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: spring-react
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: yleymard/frontend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 4000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: spring-react
+spec:
+  selector:
+    app: frontend
+  ports:
+    - name: frontend
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
+  type: LoadBalancer
+  externalIPs: 
+    - 192.168.106.10
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: springboot-ingress
-  namespace: spring-mantis
+  namespace: spring-react
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -117,14 +157,14 @@ spec:
               service:
                 name: springboot-app
                 port:
-                  number: 8787
+                  number: 4000
 
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mysql-pv-claim
-  namespace: spring-mantis
+  namespace: spring-react
 spec:
   accessModes:
     - ReadWriteOnce
@@ -139,7 +179,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: mysql-pv
-  namespace: spring-mantis
+  namespace: spring-react
 spec:
   accessModes:
     - ReadWriteOnce
