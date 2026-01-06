@@ -187,4 +187,4 @@ spec:
     storage: 1Gi
   storageClassName: standard
   hostPath:
-    path: /mnt/mysql-pv
+    path: D:\k8s_mysql
