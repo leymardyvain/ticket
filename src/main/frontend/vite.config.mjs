@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => {
       // this sets a default port to 3000
       port: PORT,
       host: true,
-      allowedHosts: ['api.burotopiris.com']
+      allowedHosts: ['api.burotopiris.local']
     },
     build: {
       chunkSizeWarningLimit: 1600
