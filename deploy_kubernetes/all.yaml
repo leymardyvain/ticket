@@ -117,7 +117,7 @@ spec:
       containers:
         - name: frontend
           image: yleymard/frontend:latest
-          imagePullPolicy: Always 
+          imagePullPolicy: IfNotPresent 
           ports:
             - containerPort: 4000
 
