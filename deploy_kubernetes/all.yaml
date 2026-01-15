@@ -148,7 +148,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: api.burotopiris.local
+    - host: api.burotopiris.com
       http:
         paths:
           - path: /
