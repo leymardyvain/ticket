@@ -155,7 +155,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: springboot-app
+                name: frontend
                 port:
                   number: 4000
 
