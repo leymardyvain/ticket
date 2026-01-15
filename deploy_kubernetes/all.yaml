@@ -96,7 +96,7 @@ spec:
       targetPort: 8788
   type: LoadBalancer
   externalIPs: 
-    - 192.168.106.10
+    - 192.168.47.150
 
 ---
 apiVersion: apps/v1
