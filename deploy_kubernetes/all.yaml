@@ -95,8 +95,6 @@ spec:
       port: 8788
       targetPort: 8788
   type: LoadBalancer
-  externalIPs: 
-    - 192.168.47.150
 
 ---
 apiVersion: apps/v1
@@ -130,13 +128,12 @@ metadata:
 spec:
   selector:
     app: frontend
-  type: NodePort
   ports:
-  - protocol: TCP
-    port: 4000
-    targetPort: 4000
-  externalIPs: 
-    - 192.168.47.150
+    - name: frontend
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
+  type: LoadBalancer
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -188,4 +185,3 @@ spec:
   storageClassName: standard
   hostPath:
     path: /mnt/mysql-pv
-
