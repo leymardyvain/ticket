@@ -130,12 +130,11 @@ metadata:
 spec:
   selector:
     app: frontend
+  type: NodePort
   ports:
-    - name: frontend
-      protocol: TCP
-      port: 4000
-      targetPort: 4000
-  type: LoadBalancer
+  - protocol: TCP
+    port: 4000
+    targetPort: 4000
   externalIPs: 
     - 192.168.47.150
 ---
