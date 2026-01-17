@@ -134,8 +134,8 @@ spec:
       port: 4000
       targetPort: 4000
   type: LoadBalancer
-#  externalIPs: 
-#    - 192.168.47.171
+  externalIPs: 
+    - 192.168.47.171
 
 ---
 apiVersion: networking.k8s.io/v1
