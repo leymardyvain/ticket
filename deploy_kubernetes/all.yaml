@@ -133,7 +133,7 @@ spec:
       protocol: TCP
       port: 4000
       targetPort: 4000
-  type: ClusterIP
+  type: NodePort
 #  externalIPs: 
 #    - 192.168.47.171
 
