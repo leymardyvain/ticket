@@ -94,7 +94,7 @@ spec:
       protocol: TCP
       port: 8788
       targetPort: 8788
-  type: LoadBalancer
+  type: ClusterIP
 
 ---
 apiVersion: apps/v1
