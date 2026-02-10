@@ -173,7 +173,7 @@ export default function ListSociete({ SocieteAdded, isSocieteAdded }) {
                 />
 
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    {!isButtonAddedClicked && <Button onClick={OpenAddedSocieteClicked} variant="contained" startIcon={<IconCirclePlus />}> Ajouter une societe</Button>}
+                    {!isButtonAddedClicked && societe.length < 2 && <Button onClick={OpenAddedSocieteClicked} variant="contained" startIcon={<IconCirclePlus />}> Ajouter une societe</Button>}
                     {isButtonAddedClicked && <Button onClick={closeAddedSocieteClicked} variant="contained" style={{ backgroundColor: "#d45858ff", color: "#f5f5f5ff" }} startIcon={<IconCircleX />}> Annuler la création</Button>}
                 </Box>
 

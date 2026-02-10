@@ -40,7 +40,7 @@ function Ville() {
       setOpen(true);
       setSeverity("error");
       setColor("red");
-      setMessage("Une erreur est survevue")
+      setMessage("Une erreur est survenue")
     }
     else {
       await addVille(formData).then(() => {
