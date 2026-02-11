@@ -67,7 +67,6 @@ public class HistoriqueController {
 	@GetMapping("/historiquebypersonnel/{username}")
 	public ResponseEntity<?> getHistoriqueByIDPersonnel(@PathVariable String username) {
 		List<Historique> historique = historiqueService.getHistoriqueById_personnel(username);
-		System.out.println("nombre "+historique.size());
 		return ResponseEntity.ok(historique);
 	}
 

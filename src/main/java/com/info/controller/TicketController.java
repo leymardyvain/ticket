@@ -111,19 +111,28 @@ public class TicketController {
 		
 		Suivi_Ticket recupSuivi_Ticket = suivi_TicketService.getSuivi_TicketsByIDTicket(RecupTicket.getId_ticket());
 		
-		Notification notification = new Notification();
-		
-		notification.setDate_notification(new Date());
-		notification.setIsreading(false);
-		notification.setMessage("Un nouveau ticket est en attente d'assignation");
-		notification.setSuivi_Ticket(recupSuivi_Ticket);
-		notification.setCode("EAA");
-		notification.setType("Action");		
 		List<Personnel> recupSupervisor = personnelService.getPersonnelBAsRoleSupervisor();
 		
 		for(Personnel pers : recupSupervisor) {
+		
+			Notification notification = new Notification();
+		
+			notification.setDate_notification(new Date());
+		
+			notification.setIsreading(false);
+		
+			notification.setMessage("Un nouveau ticket est en attente d'assignation");
+		
+			notification.setSuivi_Ticket(recupSuivi_Ticket);
+		
+			notification.setCode("EAA");
+		
+			notification.setType("Action");		
+		
 			notification.setPersonnel_concerne(pers);
+			
 			notificationService.createNotification(notification);
+			
 		}
 		
 		return ResponseEntity.ok(newTicket);

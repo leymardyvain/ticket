@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.info.entities.Historique;
-import com.info.entities.Historique;
 import com.info.repo.HistoriqueRepo;
 
 

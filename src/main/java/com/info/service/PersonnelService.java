@@ -76,7 +76,7 @@ public class PersonnelService {
 				}
 				if (role.getRole_name().equals("ROLE_SUPERVISEUR")) {
 					find = false;
-					break;
+					//break;
 				}
 			}
 			if (find) {
@@ -93,18 +93,14 @@ public class PersonnelService {
 
 			Collection<Role> ListRoleUSer = pers.getUser().getRoles();
 
-			boolean find = false;
-
 			for (Role role : ListRoleUSer) {
 				if (role.getRole_name().equals("ROLE_SUPERVISEUR")) {
-					find = true;
-					break;
+					newListPersonne.add(pers);
 				}
 			}
-			if (find) {
-				newListPersonne.add(pers);
-			}
+			
 		}
+		
 		return newListPersonne;
 	}
 	

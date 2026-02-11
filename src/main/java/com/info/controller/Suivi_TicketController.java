@@ -78,8 +78,6 @@ public class Suivi_TicketController {
 		List<Suivi_Ticket> List_suivi_Tickets = suivi_TicketService
 				.getSuivi_TicketByUsernameHasPersonnelEnCharge(username);
 
-		System.out.println("List_suivi_Tickets " + List_suivi_Tickets.size());
-
 		List<Personnel> List_personnel_en_charge = personnelService.getAllPersonnels();
 
 		List<MostPopular> listMostPopular = new ArrayList<MostPopular>();
@@ -154,8 +152,8 @@ public class Suivi_TicketController {
 		Calendar cal = Calendar.getInstance();
 
 		int year = cal.get(Calendar.YEAR);
-
-		SimpleDateFormat formattermoisannee = new SimpleDateFormat("MMMM "+year);
+		
+		SimpleDateFormat formattermoisannee = new SimpleDateFormat("MMMM yyyy");
 
 		List<Suivi_Ticket> List_suivi_Tickets = suivi_TicketService.getAllSuivi_Tickets();
 
@@ -171,13 +169,15 @@ public class Suivi_TicketController {
 
 			for (String moisan : ListMoisannee) {
 
-				String newDaterecup = moisan+" "+year;
+				String newDaterecup = moisan+" "+year;				
 
 				int nombre_etat = 0;
 
 				for (Suivi_Ticket suivi : List_suivi_Tickets) {
 
 					if (newDaterecup.equals(formattermoisannee.format(suivi.getDate_suivi_ticket()))) {
+						
+						/*System.out.println("newDaterecup "+newDaterecup +" "+formattermoisannee.format(suivi.getDate_suivi_ticket()));*/
 
 						if (etat.getNom_etat_Ticket().equals(suivi.getEtat_Ticket().getNom_etat_Ticket())) {
 							nombre_etat++;
@@ -197,9 +197,7 @@ public class Suivi_TicketController {
 
 			liste_Series.add(new_series);
 		}
-		
-		System.out.println("dans backend "+liste_Series.size());
-		
+				
 		return ResponseEntity.ok(liste_Series);
 	}
 
@@ -219,7 +217,7 @@ public class Suivi_TicketController {
 
 		int year = cal.get(Calendar.YEAR);
 
-		SimpleDateFormat formattermoisannee = new SimpleDateFormat("MMMM " + year);
+		SimpleDateFormat formattermoisannee = new SimpleDateFormat("MMMM yyyy");
 
 		List<Suivi_Ticket> List_suivi_Tickets = suivi_TicketService.getSuivi_TicketByUsername(username);
 
