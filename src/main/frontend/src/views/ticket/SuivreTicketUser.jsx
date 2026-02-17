@@ -1,5 +1,5 @@
 import { Chip, Grid, IconButton, Menu, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, TextField, Tooltip } from '@mui/material'
-import { IconAccessible, IconBan, IconCircleCheck, IconClock, IconDoor, IconDotsVertical, IconEye, IconPlaystationX, IconSettingsAutomation } from '@tabler/icons-react';
+import { IconAccessible, IconBan, IconCircleCheck, IconClock, IconDoor, IconDotsVertical, IconEye, IconPlaystationX, IconSettingsAutomation, IconActivityHeartbeat } from '@tabler/icons-react';
 import React, { useState } from 'react'
 import MainCard from 'ui-component/cards/MainCard';
 import { getSuivi_Ticket } from '../../api/APIsuiviTicket';
@@ -10,6 +10,7 @@ import DisplayUserDialog from './DisplayUserDialog';
 import ConfirmationUserDialog from './ConfirmationUserDialog';
 import AnnulationUserDialog from './AnnulationUserDialog';
 import Dropdown from './Dropdown ';
+import DisplayHistoriqueDialog from './DisplayHistoriqueDialog';
 
 function SuivreTicketUser() {
 
@@ -37,6 +38,8 @@ function SuivreTicketUser() {
 
     const [openDisplay, setOpenDislplay] = useState(false);
 
+    const [openHistorique, setOpenHistorique] = useState(false);
+
     const [openConfirmation, setOpenConfirmation] = useState(false);
 
     const [openAnnulation, setOpenAnnulation] = useState(false);
@@ -57,6 +60,11 @@ function SuivreTicketUser() {
     const Displaydetails = (row) => {
         setSelectedSuivi(() => row);
         setOpenDislplay(true);
+    };
+
+    const Displayhistorique = (row) => {
+        setSelectedSuivi(() => row);
+        setOpenHistorique(true);
     };
 
     const Displayconfirmation = (row) => {
@@ -277,14 +285,23 @@ function SuivreTicketUser() {
                                                         size='small' label={row.etat_Ticket.nom_etat_Ticket} />
                                                 </TableCell>
                                                 <TableCell align='left'>
-                                                     <Tooltip title="Voir">
+                                                    <Tooltip title="Voir">
                                                         <IconButton aria-label="voir"
                                                             size="large"
                                                             sx={{ bgcolor: '#f0f1f5ff', color: "#486de7ff", marginRight: "2px" }}
                                                             onClick={() => Displaydetails(row)}>
                                                             <IconEye fontSize="inherit" style={{ strokeWidth: "2" }} />
                                                         </IconButton>
-                                                        
+
+                                                    </Tooltip>
+                                                    <Tooltip title="Historique">
+                                                        <IconButton aria-label="voir"
+                                                            size="large"
+                                                            sx={{ bgcolor: '#f0f1f5ff', color: "rgb(218, 72, 231)", marginRight: "2px" }}
+                                                            onClick={() => Displayhistorique(row)}>
+                                                            <IconActivityHeartbeat fontSize="inherit" style={{ strokeWidth: "2" }} />
+                                                        </IconButton>
+
                                                     </Tooltip>
                                                     {row.etat_Ticket.nom_etat_Ticket === "Résolu" && <Tooltip title="Confirmer résolution">
                                                         <IconButton aria-label="fermer"
@@ -322,6 +339,7 @@ function SuivreTicketUser() {
                 </MainCard>
             </Grid>
             <DisplayUserDialog open={openDisplay} setOpen={setOpenDislplay} data={selectedSuivi} />
+            <DisplayHistoriqueDialog open={openHistorique} setOpen={setOpenHistorique} data={selectedSuivi} />
             <ConfirmationUserDialog open={openConfirmation} setOpen={setOpenConfirmation} selectedSuivi={selectedSuivi} setIsConfirm={setIsConfirm} />
             <AnnulationUserDialog open={openAnnulation} setOpen={setOpenAnnulation} selectedSuivi={selectedSuivi} setIsConfirm={setIsConfirm} />
         </Grid >
